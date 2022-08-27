@@ -1,0 +1,143 @@
+import React from "react";
+import { CSSProperties } from "react";
+import { Colors } from "../colors";
+
+export interface CardProps {
+    className?: string;
+    style?: CSSProperties;
+    header?: string;
+    subtitle?: string;
+    padding?: 'default' | 'sm' | 'md' | 'lg';
+    children?: any;
+    borderless?: boolean;
+    hoverable?: boolean;
+    image?: string;
+    statusColor?: Colors;
+    statusPosition?: 'top' | 'start' | 'bottom';
+    stacked?: boolean;
+    hoverEffect?: 'pop' | 'rotate';
+    rotate?: 'left' | 'right';
+    lightHeader?: boolean;
+    active?: boolean;
+    inactive?: boolean;
+    ribbon?: string;
+    stamp?: React.ReactNode;
+    color?: Colors;
+    ribbonPosition?: 'top' | 'start';
+    light?: boolean;
+    progress?: number;
+    imageAlign?: 'left' | 'right' | 'top' | 'bottom';
+    footer?: React.ReactNode;
+    transparentFooter?: boolean;
+    imageClasses?: string;
+    actions?: React.ReactNode[];
+}
+
+const Card: React.FC<CardProps> = ({
+    className = '',
+    padding = 'default',
+    header,
+    borderless,
+    style,
+    hoverable,
+    children,
+    image,
+    subtitle,
+    statusColor,
+    statusPosition,
+    ribbon,
+    hoverEffect,
+    stacked,
+    rotate,
+    color,
+    light,
+    active,
+    inactive,
+    lightHeader,
+    stamp,
+    imageAlign = 'top',
+    progress,
+    ribbonPosition,
+    transparentFooter,
+    footer,
+    actions,
+    imageClasses = '',
+}) => {
+    const classes = [
+        'card',
+        imageAlign && ['left', 'right'].includes(imageAlign) && 'd-flex flex-column',
+        stacked && 'card-stacked',
+        padding && padding !== 'default' && `card-${padding}`,
+        borderless && 'card-borderless',
+        hoverable && 'card-link',
+        rotate && ['left', 'right'].includes(rotate) && `card-rotate-${rotate}`,
+        hoverEffect && ['pop', 'rotate'].includes(hoverEffect) && `card-link-${hoverEffect}`,
+        active && 'card-active',
+        inactive && 'card-inactive',
+        color && `bg-${color}${light ? '-lt' : ''}`,
+        className
+    ].filter(Boolean).join(' ');
+
+    const headerClasses = [
+        'card-header',
+        lightHeader && 'card-header-light'
+    ].filter(Boolean).join(' ');
+    if (['left', 'right'].includes(imageAlign)) {
+        return (
+            <div style={style} className={classes}>
+                {(statusColor || statusPosition) && <div className={`card-status-${statusPosition} bg-${statusColor}`}></div>}
+                <div className='row row-0 flex-fill'>
+                    <div className={`col-3 ${imageAlign === 'right' ? 'order-md-last' : ''}`}>
+                        {image && <img src={image} className={`object-cover h-100 w-100 ${imageClasses}`} />}
+                    </div>
+                    <div className='col'>
+                        {ribbon && <div className={`ribbon ${ribbonPosition === 'top' ? 'ribbon-top' : ''}`}></div>}
+                        {stamp && <div className="card-stamp">
+                            <div className="card-stamp-icon">{stamp}</div>
+                        </div>}
+                        {(header || (actions && actions?.length > 0)) && <div className={headerClasses}>
+                            <h3 className="card-title">{header}</h3>
+                            {subtitle && <span className="card-subtitle">{subtitle}</span>}
+                            {actions && <div className="card-actions">{actions?.map(action => action)}</div>}
+                        </div>}
+                        <div className="card-body">
+                            <p className="text-muted">{children}</p>
+                            {(progress && progress > 0 && progress < 100) && <div className="progress progress-sm card-progress">
+                                <div className="progress-bar" style={{ width: `${progress}%` }} role="progressbar" aria-valuenow={progress} aria-valuemin={0} aria-valuemax={100} ></div>
+                            </div>}
+                        </div>
+                        {footer && <div className={`card-footer ${transparentFooter ? 'card-footer-transparent' : ''}`}>
+
+                        </div>}
+                    </div>
+                </div>
+            </div>
+        )
+    } else {
+        return (
+            <div style={style} className={classes}>
+                {(statusColor || statusPosition) && <div className={`card-status-${statusPosition} bg-${statusColor}`}></div>}
+                {image && imageAlign === 'top' && <img src={image} className={`card-img-top ${imageClasses}`} />}
+                {ribbon && <div className={`ribbon ${ribbonPosition === 'top' ? 'ribbon-top' : ''}`}></div>}
+                {stamp && <div className="card-stamp">
+                    <div className="card-stamp-icon">{stamp}</div>
+                </div>}
+                {header && <div className={headerClasses}>
+                    <h3 className="card-title">{header}</h3>
+                    {subtitle && <span className="card-subtitle">{subtitle}</span>}
+                </div>}
+                <div className="card-body">
+                    <p className="text-muted">{children}</p>
+                    {(progress && progress > 0 && progress < 100) && <div className="progress progress-sm card-progress">
+                        <div className="progress-bar" style={{ width: `${progress}%` }} role="progressbar" aria-valuenow={progress} aria-valuemin={0} aria-valuemax={100} ></div>
+                    </div>}
+                </div>
+                {image && imageAlign === 'bottom' && <img src={image} className={`card-img-bottom ${imageClasses}`} />}
+                {footer && <div className={`card-footer ${transparentFooter ? 'card-footer-transparent' : ''}`}>
+                </div>}
+            </div>
+        )
+    }
+}
+
+export default Card;
