@@ -1,13 +1,15 @@
 import React, { HTMLAttributes, useEffect, useState } from "react";
-
+import { IconCircleCheck, IconAlertTriangle } from '@tabler/icons';
+import { Colors } from "../colors";
 export interface ModalProps {
     title?: string;
     onClose?: () => void;
     footer?: React.ReactNode;
-    show: boolean;
+    show?: boolean;
     fullWidth?: boolean;
     scollable?: boolean;
     size?: 'lg' | 'sm' | 'default';
+    statusColor?: Colors;
 }
 
 const Modal: React.FC<ModalProps & HTMLAttributes<HTMLDivElement>> = ({
@@ -20,6 +22,7 @@ const Modal: React.FC<ModalProps & HTMLAttributes<HTMLDivElement>> = ({
     onClose,
     fullWidth,
     scollable,
+    statusColor,
     size = 'default',
     ...props
 }) => {
@@ -50,18 +53,18 @@ const Modal: React.FC<ModalProps & HTMLAttributes<HTMLDivElement>> = ({
 
     useEffect(() => {
         if (show) {
-            setStyle({ ...Style, display: 'block'});
+            setStyle({ ...Style, display: 'block' });
             setTimeout(() => {
                 setVisible(true)
             }, 0.15 * 1000)
         } else {
             setVisible(false);
             setTimeout(() => {
-                setStyle({ ...Style, display: 'none'})
+                setStyle({ ...Style, display: 'none' })
             }, 0.15 * 1000)
         }
     }, [show])
-    
+
     return (
         <div
             {...props}
@@ -71,6 +74,7 @@ const Modal: React.FC<ModalProps & HTMLAttributes<HTMLDivElement>> = ({
             {...otherProps}>
             <div className={innerClasses} role="document">
                 <div className="modal-content">
+                    {statusColor && <div className={`modal-status bg-${statusColor}`}></div>}
                     <div className="modal-header">
                         {title && <h5 className="modal-title">{title}</h5>}
                         <button type="button" className="btn-close" data-bs-dismiss="modal" onClick={onClose} aria-label="Close"></button>
@@ -96,13 +100,14 @@ export interface AlertModalProps {
     onCancel?: (ev: any) => void;
 }
 
-export const AlertModal: React.FC<AlertModalProps> = ({
+export const AlertModal: React.FC<AlertModalProps & ModalProps> = ({
     title,
     message,
     cancelText,
     okText,
     onCancel,
-    onConfirm
+    onConfirm,
+    ...props
 }) => {
     const footer = (
         <div className="w-100">
@@ -121,9 +126,9 @@ export const AlertModal: React.FC<AlertModalProps> = ({
         </div>
     )
     return (
-        <Modal footer={footer}>
-            <div className="modal-body text-center py-4">
-                <div className="modal-status bg-danger"></div>
+        <Modal {...props} footer={footer} statusColor='danger'>
+            <div className="text-center">
+                <IconAlertTriangle className="icon mb-2 text-danger icon-lg" />
                 <h3>{title}</h3>
                 <div className="text-muted">
                     {message}
@@ -133,13 +138,14 @@ export const AlertModal: React.FC<AlertModalProps> = ({
     )
 }
 
-export const SuccessModal: React.FC<AlertModalProps> = ({
+export const SuccessModal: React.FC<AlertModalProps & ModalProps> = ({
     title,
     message,
     cancelText,
     okText,
     onCancel,
-    onConfirm
+    onConfirm,
+    ...props
 }) => {
     const footer = (
         <div className="w-100">
@@ -158,9 +164,9 @@ export const SuccessModal: React.FC<AlertModalProps> = ({
         </div>
     )
     return (
-        <Modal footer={footer}>
-            <div className="modal-body text-center py-4">
-                <div className="modal-body text-center py-4" ></div>
+        <Modal {...props} footer={footer} statusColor='success'>
+            <div className="text-center" >
+                <IconCircleCheck className="icon mb-2 text-green icon-lg" />
                 <h3>{title}</h3>
                 <div className="text-muted">
                     {message}

@@ -3,7 +3,7 @@ import type { CSSProperties, DetailedHTMLProps, InputHTMLAttributes } from 'reac
 import { Colors } from '../colors';
 
 export interface ButtonProps {
-    type: 'submit' | 'reset' | 'button';
+    type?: 'submit' | 'reset' | 'button';
     htmlType?: string;
     className?: string;
     style?: CSSProperties;

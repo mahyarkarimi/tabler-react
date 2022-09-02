@@ -1,7 +1,7 @@
 /**
  * @TODO Needs more check and fix
  */
-import React, { CSSProperties, useState } from "react";
+import React, { CSSProperties, useCallback, useEffect, useMemo, useState } from "react";
 
 export interface CarouselProps {
     className?: string;
@@ -23,13 +23,13 @@ const Carousel: React.FC<CarouselProps> = ({
     className,
     style,
     items,
-    defaultIndex,
+    defaultIndex = 0,
     indicator,
     indicatorPosition,
     anim,
 }) => {
     const cid = 'carousel-element';
-    const [active, setActive] = useState<number>(defaultIndex || 0);
+    const [active, setActive] = useState(defaultIndex);
 
     const classes = [
         'carousel slide',
@@ -59,23 +59,25 @@ const Carousel: React.FC<CarouselProps> = ({
         default:
             break;
     }
+    
+
     return (
         <div id={cid} className={classes} style={style} data-bs-ride="carousel">
             <div className={indicatorClasses.join(' ')}>
-                {items.map((item, index) => (
+                {items.map((item, i) => (
                     <button 
-                        key={index} 
-                        onClick={() => setActive(index)}
+                        key={i} 
+                        onClick={() => setActive(i)}
                         type="button" data-bs-target={`#${cid}`}
-                        data-bs-slide-to={index}
-                        className={active === index ? 'active' : ''}>
+                        data-bs-slide-to={i}
+                        className={active === i ? 'active' : ''}>
                             {indicator === 'thumb' && <img src={item.src} style={{ borderRadius: 'inherit', width: 'inhert', height: 'auto', boxShadow: 'inherit', margin: 'inherit', opacity: 'inherit' }} className="ratio ratio-4x3" />}
                     </button>
                 ))}
             </div>
             <div className="carousel-inner">
-                {items.map((item, index) => (
-                    <div key={index} className={`carousel-item ${active === index ? 'active' : ''}`}>
+                {items.map((item, i) => (
+                    <div id={`carousel-inner-${i}`} key={i} className={`carousel-item ${defaultIndex === i ? 'active' : ''}`}>
                         <img className="d-block w-100" alt="" src={item.src} />
                         {item.caption && <div className="carousel-caption-background d-none d-md-block"></div>}
                         {item.caption && <div className="carousel-caption d-none d-md-block">
@@ -85,14 +87,14 @@ const Carousel: React.FC<CarouselProps> = ({
                     </div>
                 ))}
             </div>
-            <a className="carousel-control-prev" href={`#${cid}`} role="button" data-bs-slide="prev">
+            {indicatorPosition === 'end' && <a className="carousel-control-prev" onClick={() => setActive(active-1)} href={`#${cid}`} role="button" data-bs-slide="prev">
                 <span className="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span className="visually-hidden">Previous</span>
-            </a>
-            <a className="carousel-control-next" href={`#${cid}`} role="button" data-bs-slide="next">
+            </a>}
+            {indicatorPosition === 'end' && <a className="carousel-control-next" onClick={() => setActive(active+1)} href={`#${cid}`} role="button" data-bs-slide="next">
                 <span className="carousel-control-next-icon" aria-hidden="true"></span>
                 <span className="visually-hidden">Next</span>
-            </a>
+            </a>}
         </div>
     )
 }

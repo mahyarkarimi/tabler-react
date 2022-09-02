@@ -24,9 +24,9 @@ Simple.args = {
 export const CustomContent = Template.bind({});
 CustomContent.args = { 
     tabs: [
-        { id: 'tab-1', title: 'Card 1', content: <Card.Vertical header="Sample Card" >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam deleniti fugit incidunt, iste, itaque minima neque pariatur perferendis sed suscipit velit vitae voluptatem.</Card.Vertical>},
-        { id: 'tab-2', title: 'Card 2', content: <Card.Vertical header="Sample Card" >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam deleniti fugit incidunt, iste, itaque minima neque pariatur perferendis sed suscipit velit vitae voluptatem.</Card.Vertical>},
-        { id: 'tab-3', title: 'Card 3', content: <Card.Vertical header="Sample Card" >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam deleniti fugit incidunt, iste, itaque minima neque pariatur perferendis sed suscipit velit vitae voluptatem.</Card.Vertical>},
+        { id: 'tab-1', title: 'Card 1', content: <Card header="Sample Card" >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam deleniti fugit incidunt, iste, itaque minima neque pariatur perferendis sed suscipit velit vitae voluptatem.</Card>},
+        { id: 'tab-2', title: 'Card 2', content: <Card header="Sample Card" >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam deleniti fugit incidunt, iste, itaque minima neque pariatur perferendis sed suscipit velit vitae voluptatem.</Card>},
+        { id: 'tab-3', title: 'Card 3', content: <Card header="Sample Card" >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam deleniti fugit incidunt, iste, itaque minima neque pariatur perferendis sed suscipit velit vitae voluptatem.</Card>},
     ]
 }
 
@@ -46,9 +46,9 @@ CapitalTitle.args = {
 export const RightAlignTab = Template.bind({});
 RightAlignTab.args = { 
     tabs: [
-        { id: 'tab-1', title: 'Card 1', content: <Card.Vertical header="Sample Card" >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam deleniti fugit incidunt, iste, itaque minima neque pariatur perferendis sed suscipit velit vitae voluptatem.</Card.Vertical>},
-        { id: 'tab-2', title: 'Card 2', content: <Card.Vertical header="Sample Card" >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam deleniti fugit incidunt, iste, itaque minima neque pariatur perferendis sed suscipit velit vitae voluptatem.</Card.Vertical>},
-        { id: 'tab-3', title: 'Card 3', content: <Card.Vertical header="Sample Card" >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam deleniti fugit incidunt, iste, itaque minima neque pariatur perferendis sed suscipit velit vitae voluptatem.</Card.Vertical>, alignEnd: true},
+        { id: 'tab-1', title: 'Card 1', content: <Card header="Sample Card" >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam deleniti fugit incidunt, iste, itaque minima neque pariatur perferendis sed suscipit velit vitae voluptatem.</Card>},
+        { id: 'tab-2', title: 'Card 2', content: <Card header="Sample Card" >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam deleniti fugit incidunt, iste, itaque minima neque pariatur perferendis sed suscipit velit vitae voluptatem.</Card>},
+        { id: 'tab-3', title: 'Card 3', content: <Card header="Sample Card" >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam deleniti fugit incidunt, iste, itaque minima neque pariatur perferendis sed suscipit velit vitae voluptatem.</Card>, alignEnd: true},
     ],
     card: true,
     allCaps: true,
@@ -57,9 +57,9 @@ RightAlignTab.args = {
 export const WithDropDown = Template.bind({});
 WithDropDown.args = { 
     tabs: [
-        { id: 'tab-1', title: 'Card 1', content: <Card.Vertical header="Sample Card" >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam deleniti fugit incidunt, iste, itaque minima neque pariatur perferendis sed suscipit velit vitae voluptatem.</Card.Vertical>},
+        { id: 'tab-1', title: 'Card 1', content: <Card header="Sample Card" >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam deleniti fugit incidunt, iste, itaque minima neque pariatur perferendis sed suscipit velit vitae voluptatem.</Card>},
         { id: 'tab-2', title: 'Card 2', dropDown: ['Action 1', 'Action 2']},
-        { id: 'tab-3', title: 'Card 3', content: <Card.Vertical header="Sample Card" >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam deleniti fugit incidunt, iste, itaque minima neque pariatur perferendis sed suscipit velit vitae voluptatem.</Card.Vertical>},
+        { id: 'tab-3', title: 'Card 3', content: <Card header="Sample Card" >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam deleniti fugit incidunt, iste, itaque minima neque pariatur perferendis sed suscipit velit vitae voluptatem.</Card>},
     ],
     card: true,
     allCaps: true,
