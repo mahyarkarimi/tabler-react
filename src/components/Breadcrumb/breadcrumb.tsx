@@ -1,7 +1,7 @@
 import React from "react";
 
 export interface BreadcrumbProps {
-    divider: 'dots' | 'arrows' | 'bullets' | 'default';
+    divider?: 'dots' | 'arrows' | 'bullets' | 'default';
 }
 export const Breadcrumb: React.FC<BreadcrumbProps> = ({
     children,

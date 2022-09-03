@@ -23,7 +23,7 @@ export interface TabsProps {
     card?: boolean;
     fill?: boolean;
     allCaps?: boolean;
-    tabs: RequireOnlyOne<TabItem, 'dropDown' | 'content'>[];
+    tabs: TabItem[] | 'dropDown' | 'content';
     defaultActiveIndex?: number;
 }
 const Tabs: React.FC<TabsProps> = ({

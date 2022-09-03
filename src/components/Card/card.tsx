@@ -1,10 +1,8 @@
-import React from "react";
+import React, { HTMLAttributes } from "react";
 import { CSSProperties } from "react";
 import { Colors } from "../colors";
-
-export interface CardProps {
-    className?: string;
-    style?: CSSProperties;
+import { Ribbon } from '../Ribbon'
+export interface CardProps extends HTMLAttributes<HTMLDivElement>{
     header?: string;
     subtitle?: string;
     padding?: 'default' | 'sm' | 'md' | 'lg';
@@ -20,10 +18,9 @@ export interface CardProps {
     lightHeader?: boolean;
     active?: boolean;
     inactive?: boolean;
-    ribbon?: string;
+    ribbon?: typeof Ribbon;
     stamp?: React.ReactNode;
     color?: Colors;
-    ribbonPosition?: 'top' | 'start';
     light?: boolean;
     progress?: number;
     imageAlign?: 'left' | 'right' | 'top' | 'bottom';
@@ -38,7 +35,6 @@ const Card: React.FC<CardProps> = ({
     padding = 'default',
     header,
     borderless,
-    style,
     hoverable,
     children,
     image,
@@ -57,11 +53,11 @@ const Card: React.FC<CardProps> = ({
     stamp,
     imageAlign = 'top',
     progress,
-    ribbonPosition,
     transparentFooter,
     footer,
     actions,
     imageClasses = '',
+    ...props
 }) => {
     const classes = [
         'card',
@@ -84,14 +80,14 @@ const Card: React.FC<CardProps> = ({
     ].filter(Boolean).join(' ');
     if (['left', 'right'].includes(imageAlign)) {
         return (
-            <div style={style} className={classes}>
+            <div {...props} className={classes}>
                 {(statusColor || statusPosition) && <div className={`card-status-${statusPosition} bg-${statusColor}`}></div>}
                 <div className='row row-0 flex-fill'>
                     <div className={`col-3 ${imageAlign === 'right' ? 'order-md-last' : ''}`}>
                         {image && <img src={image} className={`object-cover h-100 w-100 ${imageClasses}`} />}
                     </div>
                     <div className='col'>
-                        {ribbon && <div className={`ribbon ${ribbonPosition === 'top' ? 'ribbon-top' : ''}`}></div>}
+                        {ribbon}
                         {stamp && <div className="card-stamp">
                             <div className="card-stamp-icon">{stamp}</div>
                         </div>}
@@ -115,10 +111,10 @@ const Card: React.FC<CardProps> = ({
         )
     } else {
         return (
-            <div style={style} className={classes}>
+            <div {...props} className={classes}>
                 {(statusColor || statusPosition) && <div className={`card-status-${statusPosition} bg-${statusColor}`}></div>}
                 {image && imageAlign === 'top' && <img src={image} className={`card-img-top ${imageClasses}`} />}
-                {ribbon && <div className={`ribbon ${ribbonPosition === 'top' ? 'ribbon-top' : ''}`}></div>}
+                {ribbon}
                 {stamp && <div className="card-stamp">
                     <div className="card-stamp-icon">{stamp}</div>
                 </div>}

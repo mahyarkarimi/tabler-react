@@ -22,6 +22,7 @@ export * from './components/Modal';
 export * from './components/Progress';
 export * from './components/Breadcrumb';
 export * from './components/Slider';
+export * from './components/PageHeader';
 export { default as Empty } from './components/Empty';
 export { default as Form } from './components/Form';
 export { default as Input } from './components/Input';

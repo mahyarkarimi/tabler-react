@@ -1,5 +1,26 @@
-import React, { useMemo, CSSProperties, cloneElement } from 'react';
-import { AvatarListProps, AvatarProps } from './types';
+import React, { useMemo, CSSProperties } from 'react';
+import { Colors } from '../colors';
+
+export interface AvatarProps {
+    className?: string;
+    style?: CSSProperties;
+    shape?: 'circle' | 'default' | Number;
+    size?: 'xl' | 'lg' | 'default' | 'md' | 'sm' | 'xs',
+    image?: any;
+    status?: {
+        indicator: 'info' | 'warning' | 'danger' | 'success'| 'grey',
+        count?: Number,
+    },
+    color?: Colors;
+    children?: any;
+    light?: boolean;
+}
+
+export interface AvatarListProps {
+    avatars?: [typeof Avatar];
+    stacked?: boolean;
+    className?: string;
+}
 
 const Avatar: React.FC<AvatarProps> = ({
     className,

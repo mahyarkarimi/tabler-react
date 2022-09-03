@@ -1,12 +1,9 @@
-import React, { useMemo } from 'react';
-import type { CSSProperties, DetailedHTMLProps, InputHTMLAttributes } from 'react';
+import React, { HTMLAttributes, useMemo } from 'react';
 import { Colors } from '../colors';
 
-export interface ButtonProps {
+export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
     type?: 'submit' | 'reset' | 'button';
     htmlType?: string;
-    className?: string;
-    style?: CSSProperties;
     mode?: 'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'info' | 'dark' | 'light';
     disabled?: boolean;
     ghost?: boolean;
@@ -19,15 +16,10 @@ export interface ButtonProps {
     light?: boolean;
     dropDown?: boolean;
     size?: 'large' | 'small' | 'default'
-    children?: string;
     value?: string;
-    onClick?: () => void
 };
 
-interface ButtonListProps {
-    className?: string;
-    style?: CSSProperties;
-    children: any;
+interface ButtonListProps extends HTMLAttributes<HTMLDivElement>{
     justify?: 'end' | 'center';
 }
 
@@ -35,7 +27,7 @@ const Button: React.FC<ButtonProps> = ({
     type = 'button',
     className,
     style,
-    mode = 'primary',
+    mode,
     disabled,
     color,
     ghost,
@@ -49,7 +41,6 @@ const Button: React.FC<ButtonProps> = ({
     size = 'default',
     children,
     value,
-    onClick,
     ...props
 }) => {
 
@@ -92,20 +83,20 @@ const Button: React.FC<ButtonProps> = ({
 
     
     return (
-        <button type={type} className={classes} style={style} value={children || value} onClick={onClick} {...props} {...(dropDown ? { 'data-bs-toggle': 'dropdown'} : {})}>
+        <button {...props} type={type} className={classes} style={style} value={value} {...(dropDown ? { 'data-bs-toggle': 'dropdown'} : {})}>
             {!loading && spinner && <span className="spinner-border spinner-border-sm me-2" role="status"></span>}
             {children || value}
-            </button>
+        </button>
     )
 }
 
 export const ButtonList: React.FC<ButtonListProps> = ({
     className,
-    style,
     children,
     justify,
+    ...props
 }) => (
-    <div className={`btn-list ${justify && 'justify-content'+justify} ${className}`} style={style}>{children}</div>
+    <div {...props} className={`btn-list ${justify && 'justify-content'+justify} ${className}`}>{children}</div>
 )
 
 export const ButtonIcon: React.FC<ButtonProps> = (props) => <Button {...props} className='btn-icon'></Button>;

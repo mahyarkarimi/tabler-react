@@ -5,14 +5,14 @@ import { Story } from "@storybook/react";
 import image from '../assets/avatar.png';
 import { IconUser } from '@tabler/icons';
 
-import { AvatarProps, AvatarList, Avatar } from "../";
+import { AvatarListProps, AvatarList, Avatar } from "../";
 
 export default {
     title: "Components/AvatarList",
     component: AvatarList
 } as Meta;
 
-const Template: Story<AvatarProps> = (args) => <AvatarList {...args} />;
+const Template: Story<AvatarListProps> = (args) => <AvatarList {...args} />;
 
 export const Default = Template.bind({});
 Default.args = { avatars: [0,1,2,3].map((i) => <Avatar image={image}>{i}</Avatar>) }

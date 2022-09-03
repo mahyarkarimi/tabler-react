@@ -32,10 +32,10 @@ export const Icon = Template.bind({});
 Icon.args = { children: IconUser }
 
 export const ColoredIcon = Template.bind({});
-ColoredIcon.args = { children: IconUser, color: 'bg-red' }
+ColoredIcon.args = { children: IconUser, color: 'red' }
 
 export const LightColoredIcon = Template.bind({});
-LightColoredIcon.args = { children: IconUser, color: 'bg-green-lt' }
+LightColoredIcon.args = { children: IconUser, color: 'green', light: true }
 
 export const Rounded = Template.bind({});
-Rounded.args = { children: IconUser, shape: 'circle', color: 'bg-lime' }
+Rounded.args = { children: IconUser, shape: 'circle', color: 'lime' }
