@@ -1,21 +1,29 @@
 import React from "react";
-import { Meta } from "@storybook/react/types-6-0";
-import { Story } from "@storybook/react";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
 
 import image from '../assets/avatar.png';
 import { IconUser } from '@tabler/icons';
 
-import { AvatarListProps, AvatarList, Avatar } from "../";
+import { AvatarList, Avatar } from "../";
 
 export default {
     title: "Components/AvatarList",
     component: AvatarList
-} as Meta;
+} as ComponentMeta<typeof AvatarList>;
 
-const Template: Story<AvatarListProps> = (args) => <AvatarList {...args} />;
+const Template: ComponentStory<typeof AvatarList> = (args) => <AvatarList {...args} />;
 
 export const Default = Template.bind({});
-Default.args = { avatars: [0,1,2,3].map((i) => <Avatar image={image}>{i}</Avatar>) }
+Default.args = {
+    children: <>
+        {[0, 1, 2, 3].map((i) => <Avatar image={image}>{i}</Avatar>)}
+    </>
+}
 
 export const Stacked = Template.bind({});
-Stacked.args = { stacked: true, avatars: [0,1,2,3].map((i) => <Avatar image={image}>{i}</Avatar>) }
+Stacked.args = {
+    stacked: true,
+    children: <>
+        {[0, 1, 2, 3].map((i) => <Avatar image={image}>{i}</Avatar>)}
+    </>
+}

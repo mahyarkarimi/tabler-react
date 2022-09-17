@@ -17,6 +17,7 @@ export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
     dropDown?: boolean;
     size?: 'large' | 'small' | 'default'
     value?: string;
+    skeleton?: boolean;
 };
 
 interface ButtonListProps extends HTMLAttributes<HTMLDivElement>{
@@ -41,6 +42,7 @@ const Button: React.FC<ButtonProps> = ({
     size = 'default',
     children,
     value,
+    skeleton,
     ...props
 }) => {
 
@@ -77,6 +79,7 @@ const Button: React.FC<ButtonProps> = ({
             loading && 'btn-loading',
             dropDown && 'dropdown-toggle',
             loading && `btn-loading`,
+            skeleton && 'placeholder',
             className
         ].filter(Boolean).join(' ');
     }, [mode, disabled, color, square, pill, ghost, outline, className, size, loading]);

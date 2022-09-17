@@ -1,9 +1,7 @@
-import React, { useMemo, CSSProperties } from 'react';
+import React, { useMemo, CSSProperties, HTMLAttributes } from 'react';
 import { Colors } from '../colors';
 
 export interface AvatarProps {
-    className?: string;
-    style?: CSSProperties;
     shape?: 'circle' | 'default' | Number;
     size?: 'xl' | 'lg' | 'default' | 'md' | 'sm' | 'xs',
     image?: any;
@@ -12,17 +10,16 @@ export interface AvatarProps {
         count?: Number,
     },
     color?: Colors;
-    children?: any;
+    skeleton?: boolean;
+    wave?: boolean;
     light?: boolean;
 }
 
 export interface AvatarListProps {
-    avatars?: [typeof Avatar];
     stacked?: boolean;
-    className?: string;
 }
 
-const Avatar: React.FC<AvatarProps> = ({
+const Avatar: React.FC<AvatarProps & HTMLAttributes<HTMLSpanElement>> = ({
     className,
     style,
     shape = 'default',
@@ -31,7 +28,10 @@ const Avatar: React.FC<AvatarProps> = ({
     image,
     color,
     light,
-    children
+    skeleton,
+    wave,
+    children,
+    ...props
 }) => {
 
     const classes = [
@@ -39,6 +39,8 @@ const Avatar: React.FC<AvatarProps> = ({
         shape && `rounded-${shape}`,
         size ? `avatar-${size}` : 'default',
         color && `bg-${color}${light ? '-lt' : ''}`,
+        skeleton && 'placeholder',
+        wave && `placeholder-wave`,
         className
     ].filter(Boolean).join(' ');
 
@@ -56,26 +58,27 @@ const Avatar: React.FC<AvatarProps> = ({
     }, [status]);
 
     return (
-        <span className={classes} style={Style}>
+        <span {...props} className={classes} style={Style}>
             {badge}
             {children && typeof children === 'function' ? children({ className: 'avatar-icon' }) : children}
         </span>
     )
 }
 
-export const AvatarList = ({
+export const AvatarList: React.FC<AvatarListProps & HTMLAttributes<HTMLDivElement>> = ({
     stacked,
     className,
-    avatars
-}: AvatarListProps) => {
+    children,
+    ...props
+}) => {
     const classes = [
         'avatar-list',
         stacked && 'avatar-list-stacked',
         className
     ].filter(Boolean).join(' ');
     return (
-        <div className={classes}>
-            {avatars}
+        <div {...props} className={classes}>
+            {children}
         </div>
     )
 }

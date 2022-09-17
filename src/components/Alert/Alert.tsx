@@ -1,13 +1,19 @@
-import React, { useMemo } from 'react';
+import React, { HTMLAttributes, useMemo } from 'react';
 import { IconCheck, IconInfoCircle, IconAlertTriangle, IconAlertCircle, TablerIconProps} from '@tabler/icons';
-import { AlertProps } from './types';
 
-const Alert: React.FC<AlertProps> = ({
-    className,
+export interface AlertProps {
+    dismissible?: boolean;
+    important?: boolean;
+    mode?: 'success' | 'info' | 'warning' | 'danger';
+}
+
+const Alert: React.FC<AlertProps & HTMLAttributes<HTMLDivElement>> = ({
     dismissible,
     important,
     mode = 'info',
-    children
+    children,
+    className,
+    ...props
 }) => {
 
     const classes = [
@@ -37,7 +43,7 @@ const Alert: React.FC<AlertProps> = ({
             Icon = IconInfoCircle;
     }
     return (
-        <div role='alert' className={classes}>
+        <div {...props} role='alert' className={classes}>
             <div className='d-flex'>
                 <div className='alert-icon'>
                     <Icon {...iconProps}/>
@@ -71,6 +77,4 @@ export const AlertLink = ({
     <a className={`alert-link ${className}`} href={href}>{children}</a>
 )
 
-Alert.Title = AlertTitle;
-Alert.Text = AlertText;
 export default Alert;

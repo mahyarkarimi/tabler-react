@@ -1,16 +1,18 @@
 import React, { useMemo } from 'react';
+import { Colors } from '../colors';
 
-import { SpinnerProps } from './types';
-
-const Spinner = ({
-    role,
-    className,
+export interface SpinnerProps {
+    color?: Colors;
+    type: 'border' | 'grow' | 'dots';
+    size?: 'sm' | 'default'
+}
+const Spinner: React.FC<SpinnerProps> = ({
     color,
+    type = 'border',
     size = 'default',
-    children
-}: SpinnerProps) => {
+}) => {
 
-    const getSize = (s) => {
+    const getSize = (s: string) => {
         switch(s){
             case 'large':
                 return 'spinner-border-lg';
@@ -21,18 +23,16 @@ const Spinner = ({
                 return '';
         }
     }
-    const classes = useMemo(() => {
-
-        return [
-            'spinner-border',
-            color && `text-${color}`,
-            getSize(size),
-            className
-        ].filter(Boolean).join(' ');
-    }, [ color,className, size]);
+    const classes = [
+        type === 'border' && 'spinner-border',
+        type === 'grow' && 'spinner-grow',
+        type === 'dots' && 'animated-dots',
+        color && `text-${color}`,
+        size === 'sm' && 'spinner-border-sm'
+    ].filter(Boolean).join(' ');
 
     return (
-        <input role={role} className={classes}>{children}</input>
+        <div role='status' className={classes}></div>
     )
 }
 

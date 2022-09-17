@@ -1,7 +1,7 @@
 import React, { HTMLAttributes } from "react";
-import { CSSProperties } from "react";
 import { Colors } from "../colors";
 import { Ribbon } from '../Ribbon'
+import { AvatarSkeleton, BoxSkeleton } from '../Skeleton'
 export interface CardProps extends HTMLAttributes<HTMLDivElement>{
     header?: string;
     subtitle?: string;
@@ -9,7 +9,7 @@ export interface CardProps extends HTMLAttributes<HTMLDivElement>{
     children?: any;
     borderless?: boolean;
     hoverable?: boolean;
-    image?: string;
+    image?: string | typeof AvatarSkeleton | typeof BoxSkeleton;
     statusColor?: Colors;
     statusPosition?: 'top' | 'start' | 'bottom';
     stacked?: boolean;
@@ -84,7 +84,8 @@ const Card: React.FC<CardProps> = ({
                 {(statusColor || statusPosition) && <div className={`card-status-${statusPosition} bg-${statusColor}`}></div>}
                 <div className='row row-0 flex-fill'>
                     <div className={`col-3 ${imageAlign === 'right' ? 'order-md-last' : ''}`}>
-                        {image && <img src={image} className={`object-cover h-100 w-100 ${imageClasses}`} />}
+                        {typeof image !== 'string' && image}
+                        {typeof image === 'string' && <img src={image} className={`object-cover h-100 w-100 ${imageClasses}`} />}
                     </div>
                     <div className='col'>
                         {ribbon}
@@ -113,7 +114,8 @@ const Card: React.FC<CardProps> = ({
         return (
             <div {...props} className={classes}>
                 {(statusColor || statusPosition) && <div className={`card-status-${statusPosition} bg-${statusColor}`}></div>}
-                {image && imageAlign === 'top' && <img src={image} className={`card-img-top ${imageClasses}`} />}
+                {typeof image !== 'string' && imageAlign === 'top' && image}
+                {typeof image === 'string' && imageAlign === 'top' && <img src={image} className={`card-img-top ${imageClasses}`} />}
                 {ribbon}
                 {stamp && <div className="card-stamp">
                     <div className="card-stamp-icon">{stamp}</div>

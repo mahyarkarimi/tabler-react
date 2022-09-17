@@ -73,10 +73,10 @@ const Tabs: React.FC<TabsProps> = ({
     return (
         <div className={classes} style={style}>
             <ul className={`nav nav-tabs ${fill ? 'nav-fill' : ''} ${allCaps ? 'nav-tabs-alt' : ''}`} data-bs-toggle="tabs">
-                {tabs.map((tab, i) => generateTabContent(tab, i))}
+                {typeof tabs !== 'string' && tabs.map((tab, i) => generateTabContent(tab, i))}
             </ul>
             <div className="tab-content">
-                {tabs.map((tab, i) => (
+                {typeof tabs !== 'string' && tabs.map((tab, i) => (
                     <div id={tab.id} className={`tab-pane ${active == i ? 'active show' : ''}`}>
                         {tab.content}
                     </div>

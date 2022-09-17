@@ -9,7 +9,7 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({
 }) => {
     const classes = [
         'breadcrumb',
-        ['arrows', 'dots', 'bullets'].includes(divider) && `breadcrumb-${divider}`
+        divider && ['arrows', 'dots', 'bullets'].includes(divider) && `breadcrumb-${divider}`
     ].filter(Boolean).join(' ');
     return (
         <ol className={classes} aria-label="breadcrumbs">
