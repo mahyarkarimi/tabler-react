@@ -1,6 +1,6 @@
 import React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { IconCircle, IconSquare, IconHeart, IconStar, IconThumbUp, IconBrandTwitter, IconCheck, IconX, IconCar, IconScooter } from '@tabler/icons';
+import { IconCircle, IconSquare, IconHeart, IconStar, IconThumbUp, IconBrandTwitter, IconCheck, IconX, IconCar, IconScooter } from '@tabler/icons-react';
 import { SwitchIcon, Flex } from "../";
 
 export default {

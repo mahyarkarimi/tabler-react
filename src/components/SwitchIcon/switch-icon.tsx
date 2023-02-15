@@ -1,4 +1,3 @@
-import { useEffect } from "@storybook/addons";
 import React, { HTMLAttributes, useState } from "react";
 import { Colors } from "../colors";
 

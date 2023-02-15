@@ -1,5 +1,6 @@
-import React, { HTMLAttributes, useMemo } from 'react';
-import { IconCheck, IconInfoCircle, IconAlertTriangle, IconAlertCircle, TablerIconProps} from '@tabler/icons';
+import React, { CSSProperties, HTMLAttributes, useMemo } from 'react';
+import { IconCheck, IconInfoCircle, IconAlertTriangle, IconAlertCircle, TablerIconsProps } from '@tabler/icons-react';
+import _ from 'lodash';
 
 export interface AlertProps {
     dismissible?: boolean;
@@ -7,12 +8,13 @@ export interface AlertProps {
     mode?: 'success' | 'info' | 'warning' | 'danger';
 }
 
-const Alert: React.FC<AlertProps & HTMLAttributes<HTMLDivElement>> = ({
+const Alert: React.FC<AlertProps & HTMLAttributes<HTMLDivElement> & CSSProperties> = ({
     dismissible,
     important,
     mode = 'info',
     children,
     className,
+    style,
     ...props
 }) => {
 
@@ -24,12 +26,12 @@ const Alert: React.FC<AlertProps & HTMLAttributes<HTMLDivElement>> = ({
         className
     ].filter(Boolean).join(' ');
 
-    const iconProps: TablerIconProps = {
+    const iconProps: TablerIconsProps = {
         size: 24,
     }
 
-    let Icon; 
-    switch(mode){
+    let Icon;
+    switch (mode) {
         case 'danger':
             Icon = IconAlertCircle;
             break;
@@ -46,7 +48,7 @@ const Alert: React.FC<AlertProps & HTMLAttributes<HTMLDivElement>> = ({
         <div {...props} role='alert' className={classes}>
             <div className='d-flex'>
                 <div className='alert-icon'>
-                    <Icon {...iconProps}/>
+                    <Icon {...iconProps} />
                 </div>
                 {children}
             </div>
@@ -58,14 +60,14 @@ const Alert: React.FC<AlertProps & HTMLAttributes<HTMLDivElement>> = ({
 export const AlertTitle = ({
     className,
     children
-}: {className?: string; children: any}) => (
+}: { className?: string; children: any }) => (
     <h4 className={`alert-title ${className}`}>{children}</h4>
 )
 
 export const AlertText = ({
     className,
     children
-}: {className?: string; children: any}) => (
+}: { className?: string; children: any }) => (
     <div className={`text-muted ${className}`}>{children}</div>
 )
 
@@ -73,7 +75,7 @@ export const AlertLink = ({
     className,
     children,
     href
-}: {className?: string; children: any; href?: string}) => (
+}: { className?: string; children: any; href?: string }) => (
     <a className={`alert-link ${className}`} href={href}>{children}</a>
 )
 

@@ -1,7 +1,7 @@
 
 import React, { Children, useEffect, useMemo, useRef, useState } from "react";
 import { AutoCompleteProps } from './types';
-import { IconCaretDown } from '@tabler/icons';
+import { IconCaretDown } from '@tabler/icons-react';
 import Input from "../Input";
 
 const AutoComplete = ({

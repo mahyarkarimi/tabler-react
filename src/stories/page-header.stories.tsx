@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { IconPlus, IconMessage, IconBuildingSkyscraper, IconUsers, IconCheck, } from '@tabler/icons'
+import { IconPlus, IconMessage, IconBuildingSkyscraper, IconUsers, IconCheck, } from '@tabler/icons-react'
 import { Avatar, Breadcrumb, BreadcrumbItem, PageHeader, Button, ButtonList } from "../";
 import avatarJpg from '../assets/avatar.png';
 

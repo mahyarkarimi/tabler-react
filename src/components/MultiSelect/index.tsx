@@ -1,7 +1,7 @@
 
 import React, { Children, useEffect, useMemo, useState } from "react";
 import { MultiSelectProps} from './types';
-import { IconCaretDown } from '@tabler/icons';
+import { IconCaretDown } from '@tabler/icons-react';
 import Input from "../Input";
 
 const MultiSelect = ({

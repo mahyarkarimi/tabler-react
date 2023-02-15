@@ -2,7 +2,6 @@ import React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 
 import image from '../assets/avatar.png';
-import { IconUser } from '@tabler/icons';
 
 import { AvatarList, Avatar } from "../";
 

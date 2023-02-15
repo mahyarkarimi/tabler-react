@@ -1,7 +1,7 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { IconUser } from '@tabler/icons';
+import { IconUser } from '@tabler/icons-react';
 
 import { Button } from "../";
 

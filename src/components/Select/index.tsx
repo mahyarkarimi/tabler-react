@@ -1,7 +1,7 @@
 
 import React, { useMemo } from "react";
 import { SelectProps } from './types';
-import { IconCaretDown } from '@tabler/icons';
+import { IconCaretDown } from '@tabler/icons-react';
 
 const Select = ({
     className,

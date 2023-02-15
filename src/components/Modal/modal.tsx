@@ -1,5 +1,5 @@
 import React, { HTMLAttributes, useEffect, useState } from "react";
-import { IconCircleCheck, IconAlertTriangle } from '@tabler/icons';
+import { IconCircleCheck, IconAlertTriangle } from '@tabler/icons-react';
 import { Colors } from "../colors";
 export interface ModalProps {
     title?: string;

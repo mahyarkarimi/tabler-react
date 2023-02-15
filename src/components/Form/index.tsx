@@ -1,9 +1,10 @@
 import { Formik, Form, FormikConfig, FormikValues } from "formik";
+import React from "react";
 
-const MyForm = ({
+const MyForm: React.FC<FormikConfig<FormikValues>> = ({
     children,
     ...props
-}: FormikConfig<FormikValues>) => {
+}) => {
     return (
         <Formik {...props}>
             <Form>

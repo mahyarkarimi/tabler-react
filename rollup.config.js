@@ -4,6 +4,7 @@ import resolve from "@rollup/plugin-node-resolve";
 import scss from "rollup-plugin-scss";
 import typescript from "@rollup/plugin-typescript";
 import { terser } from "rollup-plugin-terser";
+import keysTransformer from 'ts-transformer-keys/transformer';
 
 export default [
   {
@@ -31,7 +32,10 @@ export default [
       }),
       external(),
       resolve(),
-      typescript(),
+      typescript({ transformers: [service => ({
+        before: [ keysTransformer(service.getProgram()) ],
+        after: []
+      })] }),  
       terser(),
     ],
   },

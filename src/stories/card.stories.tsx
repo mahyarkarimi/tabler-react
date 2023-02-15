@@ -22,7 +22,13 @@ WithHeaderCard.args = {
     header: 'Shut up!'
 }
 
-export const WithImageCard = Template.bind({});
+export const WithImageCard = () => (
+    <div style={{ maxWidth: '350px'}}>
+        <Card image={image} header={WithHeaderCard.args?.header}>
+            {WithHeaderCard.args?.children}
+        </Card>
+    </div>
+)
 WithImageCard.args = {
     ...WithHeaderCard.args,
     image
@@ -40,10 +46,7 @@ WithStatusCard.args = {
     ...WithHeaderCard.args,
     statusColor: 'azure',
     statusPosition: 'top',
-    imageAlign: 'left',
 }
-
-
 
 export const LeftImageWithHeaderCard = Template.bind({});
 LeftImageWithHeaderCard.args = { 

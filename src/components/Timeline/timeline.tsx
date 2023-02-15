@@ -1,4 +1,5 @@
 import React, { HTMLAttributes } from "react";
+import { Card } from "../Card";
 import { Colors } from "../colors";
 
 export interface TimelineProps {
@@ -19,24 +20,24 @@ const Timeline: React.FC<TimelineProps & HTMLAttributes<HTMLUListElement>> = ({
     ...props
 }) => {
     const classes = [
-        'list',
-        'list-timeline',
-        simple && 'list-timeline-simple',
+        'timeline',
+        simple && 'timeline-simple',
         className,
     ].filter(Boolean).join(' ');
 
     return (
         <ul {...props} className={classes}>
             {items.map((item, index) => (
-                <li key={index}>
-                    <div className={`list-timeline-icon ${item.color ? 'bg-'+item.color : ''}`}>
+                <li key={index} className='timeline-event'>
+                    <div className={`timeline-event-icon ${item.color ? 'bg-'+item.color : ''}`}>
                         {item.icon}
                     </div>
-                    <div className="list-timeline-content">
-                        <div className="list-timeline-time">{item.time}</div>
-                        <p className="list-timeline-title">{item.title}</p>
+                    <Card className="timeline-event-card" >
+                        <div className="text-muted float-end">{item.time}</div>
+                        <h4>{item.title}</h4>
                         <p className="text-muted">{item.description}</p>
-                    </div>
+                    </Card>
+                    
                 </li>
             ))}
         </ul>

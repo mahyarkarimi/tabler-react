@@ -13,7 +13,7 @@ const Template: ComponentStory<typeof Alert> = (args) => <Alert {...args} />;
 
 
 export const InfoAlert = Template.bind({});
-InfoAlert.args = { mode: 'info', children: 'sample alert' };
+InfoAlert.args = { mode: 'info', children: 'sample alert', display: 'inline', margin: '55px', "aria-atomic":'true' };
 
 export const DangerAlert = Template.bind({});
 DangerAlert.args = { mode: 'danger', children: 'sample alert' };

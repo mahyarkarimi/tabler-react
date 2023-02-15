@@ -2,7 +2,7 @@ import React from "react";
 import {  ComponentMeta, ComponentStory } from "@storybook/react";
 
 import image from '../assets/avatar.png';
-import { IconUser } from '@tabler/icons';
+import { IconUser } from '@tabler/icons-react';
 
 import { Avatar } from "../";
 
@@ -29,13 +29,13 @@ export const WithBadge = Template.bind({});
 WithBadge.args = { image: image, status: {indicator: 'danger'} }
 
 export const Icon = Template.bind({});
-Icon.args = { children: IconUser }
+Icon.args = { children: <IconUser /> }
 
 export const ColoredIcon = Template.bind({});
-ColoredIcon.args = { children: IconUser, color: 'red' }
+ColoredIcon.args = { children: <IconUser />, color: 'red' }
 
 export const LightColoredIcon = Template.bind({});
-LightColoredIcon.args = { children: IconUser, color: 'green', light: true }
+LightColoredIcon.args = { children: <IconUser />, color: 'green', light: true }
 
 export const Rounded = Template.bind({});
-Rounded.args = { children: IconUser, shape: 'circle', color: 'lime' }
+Rounded.args = { children: <IconUser />, shape: 'circle', color: 'lime' }
