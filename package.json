@@ -29,6 +29,7 @@
     "@types/react": "^17.0.39",
     "babel-loader": "^8.2.5",
     "choices.js": "^10.1.0",
+    "chromatic": "^6.17.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "rollup": "^2.78.1",

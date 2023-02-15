@@ -2,7 +2,7 @@ import React from "react";
 import { Meta } from "@storybook/react/types-6-0";
 import { Story, ComponentMeta, ComponentStory } from "@storybook/react";
 
-import { Alert } from "../";
+import { Alert, AlertTitle } from "../";
 
 export default {
     title: "Components/Alert",
@@ -25,7 +25,7 @@ export const SuccessAlert = Template.bind({});
 SuccessAlert.args = { mode: 'success', children: 'sample alert' };
 
 export const WithTitle = Template.bind({});
-WithTitle.args = { mode: 'info', children: <Alert.Title>Title</Alert.Title> };
+WithTitle.args = { mode: 'info', children: <AlertTitle>Title</AlertTitle> };
 
 export const Important = Template.bind({});
 Important.args = { mode: 'info', important: true, children: 'sample alert' };
