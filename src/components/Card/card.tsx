@@ -1,12 +1,11 @@
 import React, { HTMLAttributes } from "react";
 import { Colors } from "../colors";
-import { Ribbon } from '../Ribbon'
+import { Ribbon, RibbonProps } from '../Ribbon'
 import { AvatarSkeleton, BoxSkeleton } from '../Skeleton'
 export interface CardProps extends HTMLAttributes<HTMLDivElement>{
     header?: string;
     subtitle?: string;
     padding?: 'default' | 'sm' | 'md' | 'lg';
-    children?: any;
     borderless?: boolean;
     hoverable?: boolean;
     image?: string | typeof AvatarSkeleton | typeof BoxSkeleton;
@@ -18,7 +17,7 @@ export interface CardProps extends HTMLAttributes<HTMLDivElement>{
     lightHeader?: boolean;
     active?: boolean;
     inactive?: boolean;
-    ribbon?: typeof Ribbon;
+    ribbon?: RibbonProps;
     stamp?: React.ReactNode;
     color?: Colors;
     light?: boolean;
@@ -30,7 +29,7 @@ export interface CardProps extends HTMLAttributes<HTMLDivElement>{
     actions?: React.ReactNode[];
 }
 
-const Card: React.FC<CardProps> = ({
+const Card = ({
     className = '',
     padding = 'default',
     header,
@@ -58,7 +57,7 @@ const Card: React.FC<CardProps> = ({
     actions,
     imageClasses = '',
     ...props
-}) => {
+}: CardProps) => {
     const classes = [
         'card',
         imageAlign && ['left', 'right'].includes(imageAlign) && 'd-flex flex-column',
@@ -88,7 +87,7 @@ const Card: React.FC<CardProps> = ({
                         {typeof image === 'string' && <img src={image} className={`object-cover h-100 w-100 ${imageClasses}`} />}
                     </div>
                     <div className='col'>
-                        {ribbon}
+                        {ribbon && <Ribbon {...ribbon} />}
                         {stamp && <div className="card-stamp">
                             <div className="card-stamp-icon">{stamp}</div>
                         </div>}
@@ -116,7 +115,7 @@ const Card: React.FC<CardProps> = ({
                 {(statusColor || statusPosition) && <div className={`card-status-${statusPosition} bg-${statusColor}`}></div>}
                 {typeof image !== 'string' && imageAlign === 'top' && image}
                 {typeof image === 'string' && imageAlign === 'top' && <img src={image} className={`card-img-top ${imageClasses}`} />}
-                {ribbon}
+                {ribbon && <Ribbon {...ribbon} />}
                 {stamp && <div className="card-stamp">
                     <div className="card-stamp-icon">{stamp}</div>
                 </div>}
@@ -125,7 +124,7 @@ const Card: React.FC<CardProps> = ({
                     {subtitle && <span className="card-subtitle">{subtitle}</span>}
                 </div>}
                 <div className="card-body">
-                    <p className="text-muted">{children}</p>
+                    {children}
                     {(progress && progress > 0 && progress < 100) && <div className="progress progress-sm card-progress">
                         <div className="progress-bar" style={{ width: `${progress}%` }} role="progressbar" aria-valuenow={progress} aria-valuemin={0} aria-valuemax={100} ></div>
                     </div>}

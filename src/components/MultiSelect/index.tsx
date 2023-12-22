@@ -1,7 +1,6 @@
 
 import React, { Children, useEffect, useMemo, useState } from "react";
 import { MultiSelectProps} from './types';
-import { IconCaretDown } from '@tabler/icons-react';
 import Input from "../Input";
 
 const MultiSelect = ({
@@ -52,7 +51,7 @@ const MultiSelect = ({
                 </label>)}
             </div>
             <span className="input-icon-addon" >
-                <IconCaretDown />
+                <i className="ti ti-caret-down" />
             </span>
         </div>
         

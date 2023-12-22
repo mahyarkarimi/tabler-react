@@ -6,30 +6,21 @@ export interface SpinnerProps {
     type: 'border' | 'grow' | 'dots';
     size?: 'sm' | 'default'
 }
-const Spinner: React.FC<SpinnerProps> = ({
+const Spinner = ({
     color,
     type = 'border',
     size = 'default',
-}) => {
+}: SpinnerProps) => {
 
-    const getSize = (s: string) => {
-        switch(s){
-            case 'large':
-                return 'spinner-border-lg';
-            case 'small':
-                return 'spinner-border-sm';
-            case 'default':
-            default:
-                return '';
-        }
-    }
-    const classes = [
-        type === 'border' && 'spinner-border',
-        type === 'grow' && 'spinner-grow',
-        type === 'dots' && 'animated-dots',
-        color && `text-${color}`,
-        size === 'sm' && 'spinner-border-sm'
-    ].filter(Boolean).join(' ');
+    const classes = useMemo(() => {
+        return [
+            type === 'border' && 'spinner-border',
+            type === 'grow' && 'spinner-grow',
+            type === 'dots' && 'animated-dots',
+            color && `text-${color}`,
+            size === 'sm' && 'spinner-border-sm'
+        ].filter(Boolean).join(' ');
+    }, [type])
 
     return (
         <div role='status' className={classes}></div>

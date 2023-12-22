@@ -1,4 +1,4 @@
-import React, { HTMLAttributes } from "react";
+import React, { HTMLAttributes, useMemo } from "react";
 import { Colors } from "../colors";
 
 export interface RibbonProps extends HTMLAttributes<HTMLDivElement> {
@@ -7,14 +7,14 @@ export interface RibbonProps extends HTMLAttributes<HTMLDivElement> {
     bookmark?: boolean;
 }
 
-const Ribbon: React.FC<RibbonProps> = ({
+const Ribbon = ({
     className,
     position,
     children,
     color,
     bookmark,
     ...props
-}) => {
+}: RibbonProps) => {
     const getPosition = (p: typeof position) => {
         switch(p){
             case 'topStart': return 'ribbon-top ribbon-start';
@@ -28,13 +28,16 @@ const Ribbon: React.FC<RibbonProps> = ({
             default: return '';
         }
     }
-    const classes = [
-        'ribbon',
-        color && `bg-${color}`,
-        position && getPosition(position),
-        bookmark && 'ribbon-bookmark',
-        className,
-    ].filter(Boolean).join(' ');
+    const classes = useMemo(() => {
+        return [
+            'ribbon',
+            color && `bg-${color}`,
+            position && getPosition(position),
+            bookmark && 'ribbon-bookmark',
+            className,
+        ].filter(Boolean).join(' ');
+    }, [color, position, bookmark, className]);
+
     return (
         <div {...props} className={classes}>
             {children}

@@ -1,13 +1,12 @@
 import '@tabler/core/';
-import '@tabler/icons';
 
 import '@tabler/core/dist/css/demo.min.css'
 import '@tabler/core/dist/css/tabler.min.css'
 import '@tabler/core/dist/css/tabler-vendors.min.css'
-import '@tabler/core/dist/css/tabler-payments.min.css'
-import '@tabler/core/dist/css/tabler-flags.min.css'
 
-import '@tabler/icons-react/dist/umd/tabler-icons-react'
+import '@tabler/icons-webfont/tabler-icons.min.css'
+import './styles/default.css';
+import 'animate.css';
 
 export * from './components/Alert';
 export * from './components/AutoComplete';

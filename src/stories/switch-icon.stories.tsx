@@ -1,6 +1,5 @@
 import React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { IconCircle, IconSquare, IconHeart, IconStar, IconThumbUp, IconBrandTwitter, IconCheck, IconX, IconCar, IconScooter } from '@tabler/icons-react';
 import { SwitchIcon, Flex } from "../";
 
 export default {
@@ -10,22 +9,22 @@ export default {
 
 const Template: ComponentStory<typeof SwitchIcon> = (args) => <SwitchIcon {...args} />;
 
-export const Heart = Template.bind({});
-Heart.args = {
-    iconA: <IconCircle />,
-    iconB: <IconSquare />,
+export const Simple = Template.bind({});
+Simple.args = {
+    iconA: <i className="ti ti-circle" />,
+    iconB: <i className="ti ti-square" />,
     stateA: 'muted',
     stateB: 'cyan',
 }
 
 export const Animations = () => (
     <Flex spaceX={2}>
-        <SwitchIcon iconA={<IconCircle />} iconB={<IconCircle />} stateA='muted' stateB='blue' anim='fade' />
-        <SwitchIcon iconA={<IconHeart />} iconB={<IconHeart className="icon-filled" />} stateA='muted' stateB='red' anim='flip' />
-        <SwitchIcon iconA={<IconStar />} iconB={<IconStar className="icon-filled" />} stateA='muted' stateB='yellow' anim='scale' />
-        <SwitchIcon iconA={<IconThumbUp />} iconB={<IconThumbUp />} stateA='muted' stateB='blue' anim='slide-down' />
-        <SwitchIcon iconA={<IconBrandTwitter />} iconB={<IconBrandTwitter />} stateA='muted' stateB='blue' anim='slide-left' />
-        <SwitchIcon iconA={<IconCheck />} iconB={<IconX />} stateA='muted' stateB='muted' anim='slide-right' />
-        <SwitchIcon iconA={<IconCar />} iconB={<IconScooter />} stateA='muted' stateB='muted' anim='slide-right' />
+        <SwitchIcon iconA={<i className="ti ti-circle" />} iconB={<i className="ti ti-circle" />} stateA='muted' stateB='blue' anim='fade' />
+        <SwitchIcon iconA={<i className="ti ti-heart" />} iconB={<i className="ti ti-heart icon-filled" />} stateA='muted' stateB='red' anim='flip' />
+        <SwitchIcon iconA={<i className="ti ti-star" />} iconB={<i className="ti ti-star icon-filled" />} stateA='muted' stateB='yellow' anim='scale' />
+        <SwitchIcon iconA={<i className="ti ti-thumb-up" />} iconB={<i className="ti ti-thumb-up" />} stateA='muted' stateB='blue' anim='slide-down' />
+        <SwitchIcon iconA={<i className="ti ti-brand-twitter" />} iconB={<i className="ti ti-brand-twitter" />} stateA='muted' stateB='blue' anim='slide-left' />
+        <SwitchIcon iconA={<i className="ti ti-check" />} iconB={<i className="ti ti-x" />} stateA='muted' stateB='muted' anim='slide-right' />
+        <SwitchIcon iconA={<i className="ti ti-car" />} iconB={<i className="ti ti-scooter" />} stateA='muted' stateB='muted' anim='slide-right' />
     </Flex>
 )

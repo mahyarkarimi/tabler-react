@@ -1,22 +1,17 @@
-import React, { CSSProperties, HTMLAttributes, useMemo } from 'react';
-import { IconCheck, IconInfoCircle, IconAlertTriangle, IconAlertCircle, TablerIconsProps } from '@tabler/icons-react';
+import React, { PropsWithChildren, useMemo } from 'react';
 import _ from 'lodash';
+import { AlertProps } from './types';
 
-export interface AlertProps {
-    dismissible?: boolean;
-    important?: boolean;
-    mode?: 'success' | 'info' | 'warning' | 'danger';
-}
-
-const Alert: React.FC<AlertProps & HTMLAttributes<HTMLDivElement> & CSSProperties> = ({
+const Alert = ({
     dismissible,
     important,
     mode = 'info',
     children,
     className,
     style,
+    customIcon,
     ...props
-}) => {
+}: AlertProps) => {
 
     const classes = [
         'alert',
@@ -26,30 +21,34 @@ const Alert: React.FC<AlertProps & HTMLAttributes<HTMLDivElement> & CSSPropertie
         className
     ].filter(Boolean).join(' ');
 
-    const iconProps: TablerIconsProps = {
-        size: 24,
-    }
 
-    let Icon;
-    switch (mode) {
-        case 'danger':
-            Icon = IconAlertCircle;
-            break;
-        case 'success':
-            Icon = IconCheck;
-            break;
-        case 'warning':
-            Icon = IconAlertTriangle;
-            break;
-        default:
-            Icon = IconInfoCircle;
-    }
+    const Icon = useMemo(() => {
+        if (customIcon) return customIcon;
+        let icon;
+        switch (mode) {
+            case 'danger':
+                icon = 'ti ti-alert-circle';
+                break;
+            case 'success':
+                icon = 'ti ti-check';
+                break;
+            case 'warning':
+                icon = 'ti ti-alert-triangle';
+                break;
+            case 'info':
+                icon = 'ti ti-info-circle';
+        }
+        return (
+            <div className='alert-icon'>
+                <i className={icon} style={{ fontSize: '24px' }} />
+            </div>
+        )
+    }, [mode, customIcon]);
+
     return (
         <div {...props} role='alert' className={classes}>
-            <div className='d-flex'>
-                <div className='alert-icon'>
-                    <Icon {...iconProps} />
-                </div>
+            <div className='d-flex '>
+                {Icon}
                 {children}
             </div>
             {dismissible && <a className="btn-close" data-bs-dismiss="alert" aria-label="close"></a>}
@@ -60,7 +59,7 @@ const Alert: React.FC<AlertProps & HTMLAttributes<HTMLDivElement> & CSSPropertie
 export const AlertTitle = ({
     className,
     children
-}: { className?: string; children: any }) => (
+}: { className?: string } & PropsWithChildren) => (
     <h4 className={`alert-title ${className}`}>{children}</h4>
 )
 
@@ -75,7 +74,7 @@ export const AlertLink = ({
     className,
     children,
     href
-}: { className?: string; children: any; href?: string }) => (
+}: { className?: string; href?: string } & PropsWithChildren) => (
     <a className={`alert-link ${className}`} href={href}>{children}</a>
 )
 

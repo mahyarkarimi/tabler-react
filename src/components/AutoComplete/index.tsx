@@ -1,7 +1,6 @@
 
 import React, { Children, useEffect, useMemo, useRef, useState } from "react";
 import { AutoCompleteProps } from './types';
-import { IconCaretDown } from '@tabler/icons-react';
 import Input from "../Input";
 
 const AutoComplete = ({
@@ -40,12 +39,13 @@ const AutoComplete = ({
 
     const inputChange = (e) => {
         setFilter(e.target.value);
-        onSearch && onSearch(e.target.value);
+        const option = options.find(o => o.value === e.target.value);
+        onSearch && option && onSearch(e.target.value, option);
     }
     
-    const onOptionSelected = (value, label) => {
-        setFilter(label)
-        onSelect && onSelect(value);
+    const onOptionSelected = (value: string, label: string) => {
+        setFilter(label);
+        onSelect && onSelect(value, { value, label });
     }
 
     return (
@@ -57,7 +57,7 @@ const AutoComplete = ({
                 </label>)}
             </div>
             <span className="input-icon-addon" >
-                <IconCaretDown />
+                <i className="ti ti-caret-down" />
             </span>
         </div>
         

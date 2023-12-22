@@ -1,7 +1,7 @@
-import React, { HTMLAttributes } from "react";
+import React, { HTMLAttributes, useMemo } from "react";
 import { Colors } from "../colors";
 
-export interface StatusProps {
+export interface StatusProps extends HTMLAttributes<HTMLDivElement> {
     color?: Colors;
     withDot?: boolean;
     lite?: boolean;
@@ -16,18 +16,21 @@ export interface StatusIndicatorProps {
     color: Colors;
 }
 
-export const StatusDot: React.FC<StatusDotProps> = ({ color, animatedDot }) => {
-    const classes = [
-        `status-dot`,
-        color && `status-${color}`, ,
-        animatedDot && `status-dot-animated`
-    ].filter(Boolean).join(' ');
+export const StatusDot = ({ color, animatedDot }: StatusDotProps) => {
+    const classes = useMemo(() => {
+        return [
+            `status-dot`,
+            color && `status-${color}`, ,
+            animatedDot && `status-dot-animated`
+        ].filter(Boolean).join(' ')
+    }, [color, animatedDot]);
+
     return (
         <span className={classes}></span>
     )
 }
 
-const Status: React.FC<StatusProps & StatusDotProps & HTMLAttributes<HTMLDivElement>> = ({
+const Status = ({
     children,
     className,
     color,
@@ -35,7 +38,7 @@ const Status: React.FC<StatusProps & StatusDotProps & HTMLAttributes<HTMLDivElem
     animatedDot,
     lite,
     ...props
-}) => {
+}: StatusProps & StatusDotProps) => {
     const classes = [
         'status',
         color && `status-${color}`,
@@ -52,9 +55,9 @@ const Status: React.FC<StatusProps & StatusDotProps & HTMLAttributes<HTMLDivElem
 }
 
 
-export const StatusIndicator: React.FC<StatusIndicatorProps> = ({
+export const StatusIndicator = ({
     color
-}) => {
+}: StatusIndicatorProps) => {
     return (
         <div className={`status-indicator status-${color} status-indicator-animated`}>
             <span className="status-indicator-circle"></span>

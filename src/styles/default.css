@@ -1,0 +1,43 @@
+.white {
+    color: #FFF;
+}
+.bg-white{
+    background: #FFF;
+    background-color: #FFF;
+}
+
+.rc-pagination ul, .rc-pagination ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.rc-pagination-item {
+    display: inline-block;
+
+    list-style: none;
+    user-select: none;
+    margin: 4px;
+}
+.rc-pagination-item button {
+    padding-inline: 8px;
+}
+.rc-pagination-prev, .rc-pagination-next, .rc-pagination-jump-prev, .rc-pagination-jump-next {
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    list-style: none;
+}
+.rc-pagination-jump-prev button, .rc-pagination-jump-next button{
+    padding-inline: 4px;
+}
+.rc-pagination-prev, .rc-pagination-next {
+    outline: 0;
+    margin-inline: 6px;
+}
+.rc-pagination-prev button, .rc-pagination-next button{
+    padding-inline: 12px;
+}
+
+.rc-pagination-disabled{
+    cursor: not-allowed;
+}

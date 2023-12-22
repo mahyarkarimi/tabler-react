@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { IconPlus, IconMessage, IconBuildingSkyscraper, IconUsers, IconCheck, } from '@tabler/icons-react'
 import { Avatar, Breadcrumb, BreadcrumbItem, PageHeader, Button, ButtonList } from "../";
 import avatarJpg from '../assets/avatar.png';
 
@@ -27,20 +26,20 @@ WithAvatarAndMeta.args = {
     title: 'Paweł Kuna',
     subTitle: <div className="row">
         <div className="col-auto">
-            <IconBuildingSkyscraper />
+            <i className="ti ti-building-skyscraper" />
             <a href="#" className="text-reset">UI Designer at Tabler</a>
         </div>
         <div className="col-auto">
-            <IconUsers />
+            <i className="ti ti-users" />
             <a href="#" className="text-reset">194 friends</a>
         </div>
         <div className="col-auto text-success">
-            <IconCheck />
+            <i className="ti ti-check" />
             Verified
         </div>
     </div>,
     action: <ButtonList>
-        <Button mode="primary"><IconMessage /> Send Message</Button>
+        <Button mode="primary"><i className="ti ti-message" /> Send Message</Button>
     </ButtonList>
 }
 
@@ -54,12 +53,12 @@ WithSearchAndBorder.args = {
             <div className="input-icon">
                 <input type="text" className="form-control" placeholder="Search…" />
                     <span className="input-icon-addon">
-                        <IconPlus />
+                        <i className="ti ti-plus" />
                     </span>
             </div>
         </div>
         <a href="#" className="btn btn-primary">
-            <IconPlus />
+            <i className="ti ti-plus" />
             Add photo
         </a>
     </div>

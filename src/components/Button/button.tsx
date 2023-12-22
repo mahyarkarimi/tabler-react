@@ -8,23 +8,21 @@ export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
     disabled?: boolean;
     ghost?: boolean;
     color?: Colors;
-    square?: boolean;
-    pill?: boolean;
+    shape?: 'square' | 'pill';
     outline?: boolean;
     loading?: boolean;
     spinner?: boolean;
-    light?: boolean;
     dropDown?: boolean;
     size?: 'large' | 'small' | 'default'
     value?: string;
     skeleton?: boolean;
 };
 
-interface ButtonListProps extends HTMLAttributes<HTMLDivElement>{
+interface ButtonListProps extends HTMLAttributes<HTMLDivElement> {
     justify?: 'end' | 'center';
 }
 
-const Button: React.FC<ButtonProps> = ({
+const Button = ({
     type = 'button',
     className,
     style,
@@ -32,9 +30,7 @@ const Button: React.FC<ButtonProps> = ({
     disabled,
     color,
     ghost,
-    square,
-    light,
-    pill,
+    shape,
     outline,
     dropDown,
     spinner,
@@ -44,37 +40,36 @@ const Button: React.FC<ButtonProps> = ({
     value,
     skeleton,
     ...props
-}) => {
+}: ButtonProps) => {
 
-    const getSize = (s: string) => {
-        switch(s){
-            case 'large':
-                return 'btn-lg';
-            case 'small':
-                return 'btn-sm';
-            case 'default':
-            default:
-                return '';
-        }
-    }
-    const getMode = () => {
-        if (outline) {
-            return `btn-outline-${mode}`;
-        }
-        if (ghost) {
-            `btn-outline-${mode}`
-        }
-        return `btn-${mode}`
-    }
     const classes = useMemo(() => {
+        const getMode = () => {
+            if (outline) {
+                return `btn-outline-${mode}`;
+            }
+            if (ghost) {
+                `btn-ghost-${mode}`
+            }
+            return `btn-${mode}`
+        }
+        const getSize = (s: string) => {
+            switch (s) {
+                case 'large':
+                    return 'btn-lg';
+                case 'small':
+                    return 'btn-sm';
+                case 'default':
+                default:
+                    return '';
+            }
+        }
 
         return [
             'btn',
             mode && getMode(),
-            disabled && 'disabled',
-            color && `btn-${color}${light? '-lt' : ''}`,
-            square && 'btn-square',
-            pill && 'btn-pill',
+            disabled && 'disabled cursor-not-allowed',
+            color && `btn-${color}`,
+            shape && `btn-${shape}`,
             getSize(size),
             loading && 'btn-loading',
             dropDown && 'dropdown-toggle',
@@ -82,40 +77,40 @@ const Button: React.FC<ButtonProps> = ({
             skeleton && 'placeholder',
             className
         ].filter(Boolean).join(' ');
-    }, [mode, disabled, color, square, pill, ghost, outline, className, size, loading]);
+    }, [mode, disabled, color, shape, ghost, outline, className, size, loading]);
 
-    
+
     return (
-        <button {...props} type={type} className={classes} style={style} value={value} {...(dropDown ? { 'data-bs-toggle': 'dropdown'} : {})}>
+        <button {...props} type={type} className={classes} style={style} value={value} {...(dropDown ? { 'data-bs-toggle': 'dropdown' } : {})}>
             {!loading && spinner && <span className="spinner-border spinner-border-sm me-2" role="status"></span>}
             {children || value}
         </button>
     )
 }
 
-export const ButtonList: React.FC<ButtonListProps> = ({
+export const ButtonList = ({
     className,
     children,
     justify,
     ...props
-}) => (
-    <div {...props} className={`btn-list ${justify && 'justify-content'+justify} ${className}`}>{children}</div>
+}: ButtonListProps) => (
+    <div {...props} className={`btn-list ${justify && 'justify-content' + justify} ${className}`}>{children}</div>
 )
 
-export const ButtonIcon: React.FC<ButtonProps> = (props) => <Button {...props} className='btn-icon'></Button>;
+export const ButtonIcon = (props: ButtonProps) => <Button {...props} className='btn-icon'></Button>;
 
-export const FaceBookButton: React.FC<ButtonProps> = (props) => <Button className={props.className + ' btn-facebook'} {...props} />
-export const TwitterButton: React.FC<ButtonProps> = (props) => <Button className={props.className + ' btn-twitter'} {...props} />
-export const GoogleButton: React.FC<ButtonProps> = (props) => <Button className={props.className + ' btn-google'} {...props} />
-export const YoutubeButton: React.FC<ButtonProps> = (props) => <Button className={props.className + ' btn-youtube'} {...props} />
-export const VimeoButton: React.FC<ButtonProps> = (props) => <Button className={props.className + ' btn-vimeo'} {...props} />
-export const DribbleButton: React.FC<ButtonProps> = (props) => <Button className={props.className + ' btn-dribbble'} {...props} />
-export const GuthubButton: React.FC<ButtonProps> = (props) => <Button className={props.className + ' btn-github'} {...props} />
-export const InstagramButton: React.FC<ButtonProps> = (props) => <Button className={props.className + ' btn-instagram'} {...props} />
-export const interestButton: React.FC<ButtonProps> = (props) => <Button className={props.className + ' btn-pinterest'} {...props} />
-export const VkButton: React.FC<ButtonProps> = (props) => <Button className={props.className + ' btn-vk'} {...props} />
-export const RssButton: React.FC<ButtonProps> = (props) => <Button className={props.className + ' btn-rss'} {...props} />
-export const FlickrButton: React.FC<ButtonProps> = (props) => <Button className={props.className + ' btn-flickr'} {...props} />
-export const BitBucketButton: React.FC<ButtonProps> = (props) => <Button className={props.className + ' btn-bitbucket'} {...props} />
-export const TablerButton: React.FC<ButtonProps> = (props) => <Button className={props.className + ' btn-tabler'} {...props} />
+export const FaceBookButton = (props: ButtonProps) => <Button className={props.className + ' btn-facebook'} {...props} />
+export const TwitterButton = (props: ButtonProps) => <Button className={props.className + ' btn-twitter'} {...props} />
+export const GoogleButton = (props: ButtonProps) => <Button className={props.className + ' btn-google'} {...props} />
+export const YoutubeButton = (props: ButtonProps) => <Button className={props.className + ' btn-youtube'} {...props} />
+export const VimeoButton = (props: ButtonProps) => <Button className={props.className + ' btn-vimeo'} {...props} />
+export const DribbleButton = (props: ButtonProps) => <Button className={props.className + ' btn-dribbble'} {...props} />
+export const GuthubButton = (props: ButtonProps) => <Button className={props.className + ' btn-github'} {...props} />
+export const InstagramButton = (props: ButtonProps) => <Button className={props.className + ' btn-instagram'} {...props} />
+export const interestButton = (props: ButtonProps) => <Button className={props.className + ' btn-pinterest'} {...props} />
+export const VkButton = (props: ButtonProps) => <Button className={props.className + ' btn-vk'} {...props} />
+export const RssButton = (props: ButtonProps) => <Button className={props.className + ' btn-rss'} {...props} />
+export const FlickrButton = (props: ButtonProps) => <Button className={props.className + ' btn-flickr'} {...props} />
+export const BitBucketButton = (props: ButtonProps) => <Button className={props.className + ' btn-bitbucket'} {...props} />
+export const TablerButton = (props: ButtonProps) => <Button className={props.className + ' btn-tabler'} {...props} />
 export default Button;

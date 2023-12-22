@@ -1,10 +1,10 @@
-import React, { HTMLAttributes } from "react";
+import React, { HTMLAttributes, useMemo } from "react";
 
-const Grid: React.FC<HTMLAttributes<HTMLDivElement>> = ({
+const Grid = ({
     children,
     className,
     ...props
-}) => {
+}: HTMLAttributes<HTMLDivElement>) => {
     const classes = [
         'datagrid',
         className
@@ -17,23 +17,26 @@ const Grid: React.FC<HTMLAttributes<HTMLDivElement>> = ({
     )
 }
 
-export interface GridItemProps {
-    title?: React.ReactNode;
+export interface GridItemProps extends HTMLAttributes<HTMLDivElement> {
+    gridTitle?: React.ReactNode;
 }
 
-export const GridItem: React.FC<GridItemProps & HTMLAttributes<HTMLDivElement>> = ({
+export const GridItem = ({
     className,
     children,
-    title,
+    gridTitle,
     ...props
-}) => {
-    const classes = [
-        'datagrid-item'
-    ].filter(Boolean).join(' ');
+}: GridItemProps) => {
+    const classes = useMemo(() => {
+        return [
+            'datagrid-item',
+            className
+        ].filter(Boolean).join(' ');
+    }, [className]);
 
     return (
-        <div className={classes}>
-            {title && <div className="datagrid-title">{title}</div>}
+        <div {...props} className={classes}>
+            {gridTitle && <div className="datagrid-title">{gridTitle}</div>}
             {children && <div className="datagrid-content">{children}</div>}
         </div>
     )

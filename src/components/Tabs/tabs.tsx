@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { CSSProperties } from "react";
 
 type RequireOnlyOne<T, Keys extends keyof T = keyof T> =
@@ -12,7 +12,7 @@ type RequireOnlyOne<T, Keys extends keyof T = keyof T> =
 interface TabItem {
     id: string;
     title: string;
-    content: any;
+    content?: any;
     dropDown?: any[];
     alignEnd?: boolean;
 }
@@ -21,34 +21,36 @@ export interface TabsProps {
     className?: string;
     style?: CSSProperties;
     card?: boolean;
-    fill?: boolean;
+    fullWidth?: boolean;
     allCaps?: boolean;
     tabs: TabItem[] | 'dropDown' | 'content';
     defaultActiveIndex?: number;
 }
-const Tabs: React.FC<TabsProps> = ({
+const Tabs = ({
     className,
     style,
     tabs,
     card,
-    fill,
+    fullWidth,
     allCaps,
     defaultActiveIndex,
-}) => {
+}: TabsProps) => {
     const rnd = (Math.random() * 10000).toFixed();
 
     const [active, setActive] = useState<number>(defaultActiveIndex || 0);
 
-    const classes = [
-        `card${card ? '-tabs' : ''}`,
-        className
-    ].filter(Boolean).join(' ');
+    const classes = useMemo(() => {
+        return [
+            `card${card ? '-tabs' : ''}`,
+            className
+        ].filter(Boolean).join(' ')
+    }, [card, className]);
 
     const generateTabContent = (tab: TabItem, i: number) => {
         if (tab.dropDown && tab.dropDown?.length > 0) {
             return (
-                <li key={i} data-bs-toggle="tab" className={`nav-item dropdown ${tab.alignEnd ? 'ms-auto' : ''}`}>
-                    <a className={`nav-link dropdown-toggle ${active == i ? 'active' : ''}`} data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <li key={i} className={`nav-item dropdown ${tab.alignEnd ? 'ms-auto' : ''}`}>
+                    <a className='nav-link dropdown-toggle' data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         {tab.title}
                     </a>
                     <div className="dropdown-menu">
@@ -62,7 +64,7 @@ const Tabs: React.FC<TabsProps> = ({
             )
         }
         return (
-            <li onClick={() => setActive(i)} id={i.toString()} className={`nav-item ${tab.alignEnd ? 'ms-auto' : ''}`}>
+            <li onClick={() => setActive(i)} id={i.toString()} className={`nav-item ${tab.alignEnd ? 'ms-auto' : ''}`} role="presentation">
                 <a href={`#${rnd}-${tab.id}`} data-bs-toggle="tab" className={`nav-link ${active == i ? 'active' : ''}`}>
                     {tab.title}
                 </a>
@@ -70,9 +72,18 @@ const Tabs: React.FC<TabsProps> = ({
         )
     }
 
+    const navClasses = useMemo(() => {
+        return [
+            'nav',
+            'nav-tabs',
+            fullWidth && 'nav-fill',
+            allCaps && 'nav-tabs-alt',
+        ].filter(Boolean).join(' ');
+    }, [allCaps, fullWidth]);
+
     return (
         <div className={classes} style={style}>
-            <ul className={`nav nav-tabs ${fill ? 'nav-fill' : ''} ${allCaps ? 'nav-tabs-alt' : ''}`} data-bs-toggle="tabs">
+            <ul className={navClasses} data-bs-toggle="tabs">
                 {typeof tabs !== 'string' && tabs.map((tab, i) => generateTabContent(tab, i))}
             </ul>
             <div className="tab-content">

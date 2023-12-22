@@ -1,7 +1,6 @@
 
 import React, { useMemo } from "react";
 import { SelectProps } from './types';
-import { IconCaretDown } from '@tabler/icons-react';
 
 const Select = ({
     className,
@@ -25,7 +24,7 @@ const Select = ({
                 {options?.map(({ label, value }) => <option value={value}>{label}</option>)}
             </select>
             <span className="input-icon-addon">
-                <IconCaretDown />
+                <i className="ti ti-caret-down" />
             </span>
 
         </div>

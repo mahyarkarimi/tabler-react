@@ -1,7 +1,6 @@
-import React, { HTMLAttributes, useEffect, useState } from "react";
-import { IconCircleCheck, IconAlertTriangle } from '@tabler/icons-react';
+import React, { HTMLAttributes, useEffect, useMemo, useState } from "react";
 import { Colors } from "../colors";
-export interface ModalProps {
+export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
     title?: string;
     onClose?: () => void;
     footer?: React.ReactNode;
@@ -12,7 +11,7 @@ export interface ModalProps {
     statusColor?: Colors;
 }
 
-const Modal: React.FC<ModalProps & HTMLAttributes<HTMLDivElement>> = ({
+const Modal = ({
     className,
     children,
     title,
@@ -25,31 +24,39 @@ const Modal: React.FC<ModalProps & HTMLAttributes<HTMLDivElement>> = ({
     statusColor,
     size = 'default',
     ...props
-}) => {
+}: ModalProps) => {
     const [Style, setStyle] = useState(style || {});
     const [visible, setVisible] = useState<boolean>();
-    const classes = [
-        'modal',
-        'modal-blur',
-        'fade',
-        className,
-    ].filter(Boolean).join(' ');
-    const innerClasses = [
-        'modal-dialog',
-        'modal-dialog-centered',
-        ['lg', 'sm'].includes(size) && `modal-${size}`,
-        fullWidth && 'modal-full-width',
-        scollable && 'modal-dialog-scrollable',
+    const classes = useMemo(() => {
+        return [
+            'modal',
+            'modal-blur',
+            'fade',
+            className,
+        ].filter(Boolean).join(' ');
+    }, [className]);
 
-    ].filter(Boolean).join(' ');
+    const innerClasses = useMemo(() => {
+        return [
+            'modal-dialog',
+            'modal-dialog-centered',
+            ['lg', 'sm'].includes(size) && `modal-${size}`,
+            fullWidth && 'modal-full-width',
+            scollable && 'modal-dialog-scrollable',
+    
+        ].filter(Boolean).join(' ');
+    }, [fullWidth, screen]);
 
-    const otherProps: HTMLAttributes<HTMLDivElement> = {};
-    if (show) {
-        otherProps['aria-modal'] = "true";
-        otherProps['role'] = "dialog";
-    } else {
-        otherProps['aria-hidden'] = "true";
-    }
+    const otherProps = useMemo<HTMLAttributes<HTMLDivElement>>(() => {
+        const o: HTMLAttributes<HTMLDivElement> = {};
+        if (show) {
+            o['aria-modal'] = "true";
+            o['role'] = "dialog";
+        } else {
+            o['aria-hidden'] = "true";
+        }
+        return o;
+    }, [show]);
 
     useEffect(() => {
         if (show) {
@@ -63,7 +70,7 @@ const Modal: React.FC<ModalProps & HTMLAttributes<HTMLDivElement>> = ({
                 setStyle({ ...Style, display: 'none' })
             }, 0.15 * 1000)
         }
-    }, [show])
+    }, [show]);
 
     return (
         <div
@@ -128,7 +135,7 @@ export const AlertModal: React.FC<AlertModalProps & ModalProps> = ({
     return (
         <Modal {...props} footer={footer} statusColor='danger'>
             <div className="text-center">
-                <IconAlertTriangle className="icon mb-2 text-danger icon-lg" />
+                <i className="ti ti-alert-triangle icon mb-2 text-danger icon-lg" />
                 <h3>{title}</h3>
                 <div className="text-muted">
                     {message}
@@ -166,7 +173,7 @@ export const SuccessModal: React.FC<AlertModalProps & ModalProps> = ({
     return (
         <Modal {...props} footer={footer} statusColor='success'>
             <div className="text-center" >
-                <IconCircleCheck className="icon mb-2 text-green icon-lg" />
+                <i className="ti ti-circle-check-filled icon mb-2 text-green icon-lg" />
                 <h3>{title}</h3>
                 <div className="text-muted">
                     {message}

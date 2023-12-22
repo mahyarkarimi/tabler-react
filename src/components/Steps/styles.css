@@ -1,0 +1,9 @@
+.steps {
+    transition: font-weight .3s ease;    
+}
+
+.step-item.active:after,
+.step-item.active:before,
+.steps:after {
+    transition: background .3s ease;
+}

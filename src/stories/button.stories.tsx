@@ -1,8 +1,6 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { IconUser } from '@tabler/icons-react';
-
 import { Button } from "../";
 
 export default {
@@ -37,7 +35,7 @@ export const Outline = Template.bind({});
 Outline.args = { children: 'Outline', outline: true, mode:'primary' }
 
 export const WithIcon = Template.bind({});
-WithIcon.args = { children: <IconUser />, }
+WithIcon.args = { children:  <i className="ti ti-user" />, }
 
 export const DropDown = Template.bind({});
 DropDown.args = { children: 'DropDown', dropDown: true }

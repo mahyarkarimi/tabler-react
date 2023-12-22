@@ -8,10 +8,9 @@ export interface BadgesProps {
     textColor?: Colors;
     mode: 'outline' | 'pill';
     style?: CSSProperties;
-    children?: any;
     light?: boolean;
 }
-const Badges: React.FC<BadgesProps> = ({
+const Badges = ({
     className,
     color,
     mode,
@@ -19,7 +18,7 @@ const Badges: React.FC<BadgesProps> = ({
     textColor,
     light,
     children
-}) => {
+}: React.PropsWithChildren<BadgesProps>) => {
 
     const classes = [
         'badge',

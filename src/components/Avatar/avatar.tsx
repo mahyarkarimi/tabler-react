@@ -1,7 +1,7 @@
 import React, { useMemo, CSSProperties, HTMLAttributes } from 'react';
 import { Colors } from '../colors';
 
-export interface AvatarProps {
+export interface AvatarProps extends HTMLAttributes<HTMLSpanElement> {
     shape?: 'circle' | 'default' | Number;
     size?: 'xl' | 'lg' | 'default' | 'md' | 'sm' | 'xs',
     image?: any;
@@ -12,14 +12,13 @@ export interface AvatarProps {
     color?: Colors;
     skeleton?: boolean;
     wave?: boolean;
-    light?: boolean;
 }
 
-export interface AvatarListProps {
+export interface AvatarListProps extends HTMLAttributes<HTMLDivElement> {
     stacked?: boolean;
 }
 
-const Avatar: React.FC<AvatarProps & HTMLAttributes<HTMLSpanElement>> = ({
+const Avatar = ({
     className,
     style,
     shape = 'default',
@@ -27,22 +26,23 @@ const Avatar: React.FC<AvatarProps & HTMLAttributes<HTMLSpanElement>> = ({
     status,
     image,
     color,
-    light,
     skeleton,
     wave,
     children,
     ...props
-}) => {
+}: AvatarProps) => {
 
-    const classes = [
-        'avatar',
-        shape && `rounded-${shape}`,
-        size ? `avatar-${size}` : 'default',
-        color && `bg-${color}${light ? '-lt' : ''}`,
-        skeleton && 'placeholder',
-        wave && `placeholder-wave`,
-        className
-    ].filter(Boolean).join(' ');
+    const classes = useMemo(() => {
+        return [
+            'avatar',
+            shape && `rounded-${shape}`,
+            size !== 'default' ? `avatar-${size}` : false,
+            color && `bg-${color}`,
+            skeleton && 'placeholder',
+            wave && `placeholder-wave`,
+            className
+        ].filter(Boolean).join(' ')
+    }, [shape, size, color, skeleton, wave, className]);
 
     const Style: CSSProperties = {
         ...style,
@@ -60,17 +60,17 @@ const Avatar: React.FC<AvatarProps & HTMLAttributes<HTMLSpanElement>> = ({
     return (
         <span {...props} className={classes} style={Style}>
             {badge}
-            {children && typeof children === 'function' ? children({ className: 'avatar-icon' }) : children}
+            {children}
         </span>
     )
 }
 
-export const AvatarList: React.FC<AvatarListProps & HTMLAttributes<HTMLDivElement>> = ({
+export const AvatarList = ({
     stacked,
     className,
     children,
     ...props
-}) => {
+}: AvatarListProps) => {
     const classes = [
         'avatar-list',
         stacked && 'avatar-list-stacked',

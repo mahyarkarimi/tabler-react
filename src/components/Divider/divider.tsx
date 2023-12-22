@@ -1,18 +1,17 @@
-import React from "react";
+import React, { HTMLAttributes } from "react";
 import { Colors } from "../colors";
 
-export interface DividerProps {
-    children?: any;
+export interface DividerProps extends HTMLAttributes<HTMLDivElement> {
     color?: Colors;
     position?: 'left' | 'right' | 'center';
 };
 
-const Divider: React.FC<DividerProps & React.HTMLAttributes<HTMLDivElement>> = ({
+const Divider = ({
     children,
     color,
     position,
     ...props
-}) => {
+}: DividerProps) => {
     const classes = [
         'hr-text',
         position !== 'center' && `hr-text-${position}`,
@@ -20,7 +19,7 @@ const Divider: React.FC<DividerProps & React.HTMLAttributes<HTMLDivElement>> = (
     ].filter(Boolean).join(' ');
 
     return (
-        <div  {...props} className={classes}>{children}</div>
+        <div {...props} className={classes}>{children}</div>
     )
 }
 

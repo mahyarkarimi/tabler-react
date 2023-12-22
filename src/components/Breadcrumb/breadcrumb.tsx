@@ -1,32 +1,34 @@
-import React from "react";
+import React, { HTMLAttributes, useMemo } from "react";
 
-export interface BreadcrumbProps {
+export interface BreadcrumbProps extends HTMLAttributes<HTMLOListElement> {
     divider?: 'dots' | 'arrows' | 'bullets' | 'default';
 }
-export const Breadcrumb: React.FC<BreadcrumbProps> = ({
+export const Breadcrumb = ({
     children,
     divider,
-}) => {
+    ...props
+}: BreadcrumbProps) => {
     const classes = [
         'breadcrumb',
         divider && ['arrows', 'dots', 'bullets'].includes(divider) && `breadcrumb-${divider}`
     ].filter(Boolean).join(' ');
     return (
-        <ol className={classes} aria-label="breadcrumbs">
+        <ol {...props} className={classes} aria-label="breadcrumbs">
             {children}
         </ol>
     )
 }
 
-export interface BreadcrumbItemProps {
+export interface BreadcrumbItemProps extends HTMLAttributes<HTMLLIElement> {
     active?: boolean;
 }
-export const BreadcrumbItem: React.FC<BreadcrumbItemProps> = ({
+export const BreadcrumbItem = ({
     children,
-    active
-}) => {
+    active,
+    ...props
+}: BreadcrumbItemProps) => {
     return (
-        <li className={`breadcrumb-item${active ? ' active': ''}`} {...(active && { "aria-current": "page"})}>
+        <li {...props} className={`breadcrumb-item ${active ? 'active': ''}`} {...(active && { "aria-current": "page"})}>
             <a href="#">{children}</a>
         </li>
     )
