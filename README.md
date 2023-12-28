@@ -5,6 +5,7 @@ React UI Components Based on
 
 Tabler is a free and open source web application UI kit based on Bootstrap 5, with hundreds responsive components and multiple layouts.
 This package is ui components version of beautiful and simple Tabler library developed to use in ReactJS framework. Every component of the package uses the base [@tabler/core](https://www.npmjs.com/package/@tabler/core) and [@tabler/icons-react](https://www.npmjs.com/package/@tabler/icons-react) library to make easy-to-use and React based set of components.
+To view documentation of components and its usage please visit [Storybook](https://63ed4f4ac6361e5b507cf5a5-xrcjjfcakx.chromatic.com/) of tabler-react-components published in chromatic.
 
 <img src="preview.webp" width="auto" height="400" />
 
@@ -34,9 +35,22 @@ yarn add tabler-react-components
 ## 🔨 Usage
 
 ```jsx
-Console.log("Coming Soon!")
+import * as React from 'react'
+
+import { TablerProvider } from 'tabler-react-components'
+
+function App() {
+  // Wrap TablerProvider at the root of your app component
+  return (
+    <TablerProvider>
+      <TheRestOfYourApplication />
+    </TablerProvider>
+  )
+}
 ```
 
 ## 🔗 Links
 
 - [Storybook page](https://63ed4f4ac6361e5b507cf5a5-xrcjjfcakx.chromatic.com/)
+- [Tabler](https://tabler.io/)
+- [Tabler Github](https://github.com/tabler/tabler)
