@@ -1,14 +1,14 @@
 import React, { HTMLAttributes } from "react";
 import { Colors } from "../colors";
 import { Ribbon, RibbonProps } from '../Ribbon'
-import { AvatarSkeleton, BoxSkeleton } from '../Skeleton'
+import { BoxSkeleton, BoxSkeletonProps } from '../Skeleton'
 export interface CardProps extends HTMLAttributes<HTMLDivElement>{
     header?: string;
     subtitle?: string;
     padding?: 'default' | 'sm' | 'md' | 'lg';
     borderless?: boolean;
     hoverable?: boolean;
-    image?: string | typeof AvatarSkeleton | typeof BoxSkeleton;
+    image?: string | BoxSkeletonProps;
     statusColor?: Colors;
     statusPosition?: 'top' | 'start' | 'bottom';
     stacked?: boolean;
@@ -83,7 +83,7 @@ const Card = ({
                 {(statusColor || statusPosition) && <div className={`card-status-${statusPosition} bg-${statusColor}`}></div>}
                 <div className='row row-0 flex-fill'>
                     <div className={`col-3 ${imageAlign === 'right' ? 'order-md-last' : ''}`}>
-                        {typeof image !== 'string' && image}
+                        {typeof image === 'object' && <BoxSkeleton {...image} />}
                         {typeof image === 'string' && <img src={image} className={`object-cover h-100 w-100 ${imageClasses}`} />}
                     </div>
                     <div className='col'>
@@ -113,7 +113,7 @@ const Card = ({
         return (
             <div {...props} className={classes}>
                 {(statusColor || statusPosition) && <div className={`card-status-${statusPosition} bg-${statusColor}`}></div>}
-                {typeof image !== 'string' && imageAlign === 'top' && image}
+                {typeof image === 'object' && imageAlign === 'top' && <BoxSkeleton {...image} />}
                 {typeof image === 'string' && imageAlign === 'top' && <img src={image} className={`card-img-top ${imageClasses}`} />}
                 {ribbon && <Ribbon {...ribbon} />}
                 {stamp && <div className="card-stamp">
@@ -129,7 +129,7 @@ const Card = ({
                         <div className="progress-bar" style={{ width: `${progress}%` }} role="progressbar" aria-valuenow={progress} aria-valuemin={0} aria-valuemax={100} ></div>
                     </div>}
                 </div>
-                {image && imageAlign === 'bottom' && <img src={image} className={`card-img-bottom ${imageClasses}`} />}
+                {image && imageAlign === 'bottom' && typeof image === 'string' && <img src={image} className={`card-img-bottom ${imageClasses}`} />}
                 {footer && <div className={`card-footer ${transparentFooter ? 'card-footer-transparent' : ''}`}>
                 </div>}
             </div>

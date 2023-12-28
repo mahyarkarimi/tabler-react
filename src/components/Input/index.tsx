@@ -19,7 +19,6 @@ const Input = ({
 
 
     const classes = useMemo(() => {
-
         return [
             'form-control',
             size && `form-control-${size}`,

@@ -1,5 +1,4 @@
 import React from "react";
-import { Meta } from "@storybook/react/types-6-0";
 import { Story, ComponentMeta, ComponentStory } from "@storybook/react";
 
 import { Alert, AlertTitle } from "../";
@@ -11,14 +10,13 @@ export default {
 
 const Template: ComponentStory<typeof Alert> = (args) => <Alert {...args} />;
 
-
 export const InfoAlert = Template.bind({});
-InfoAlert.args = { mode: 'info', children: 'sample alert', display: 'inline', margin: '55px', "aria-atomic":'true' };
+InfoAlert.args = { mode: 'info', children: 'sample alert', display: 'inline', margin: '55px', "aria-atomic": 'true' };
 
 export const DangerAlert = Template.bind({});
 DangerAlert.args = { mode: 'danger', children: 'sample alert' };
 
-export const WarningAlert = Template.bind({}); 
+export const WarningAlert = Template.bind({});
 WarningAlert.args = { mode: 'warning', children: 'sample alert' };
 
 export const SuccessAlert = Template.bind({});

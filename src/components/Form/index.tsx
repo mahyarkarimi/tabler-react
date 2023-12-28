@@ -1,10 +1,10 @@
 import { Formik, Form, FormikConfig, FormikValues } from "formik";
-import React from "react";
+import React, { PropsWithChildren } from "react";
 
-const MyForm: React.FC<FormikConfig<FormikValues>> = ({
+const TablerForm = ({
     children,
     ...props
-}) => {
+}: PropsWithChildren<FormikConfig<FormikValues>>) => {
     return (
         <Formik {...props}>
             <Form>
@@ -14,4 +14,4 @@ const MyForm: React.FC<FormikConfig<FormikValues>> = ({
     )
 }
 
-export default MyForm;
+export default TablerForm;

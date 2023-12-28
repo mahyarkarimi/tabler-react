@@ -19,7 +19,17 @@ This package is ui components version of beautiful and simple Tabler library dev
 
 ## 📦 Installation
 
-> Coming Soon!
+To install the React Pagination UI Component Library, you can use npm or yarn:
+
+```bash
+npm install tabler-react-components
+```
+
+or
+
+```bash
+yarn add tabler-react-components
+```
 
 ## 🔨 Usage
 

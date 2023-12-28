@@ -1,5 +1,5 @@
 
-import React, { Children, useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { MultiSelectProps} from './types';
 import Input from "../Input";
 
@@ -14,10 +14,10 @@ const MultiSelect = ({
     onChange
 }: MultiSelectProps) => {
 
-    const [dropDown, setDropDown] = useState('');
-    const [selected, setSelected] = useState([]);
+    const [dropDown, setDropDown] = useState<string>('');
+    const [selected, setSelected] = useState<string[]>([]);
 
-    const changeSelected = (ev) => {
+    const changeSelected = (ev: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = ev.target;
         const index = selected.findIndex(v => v === value);
         if (index <= -1) {

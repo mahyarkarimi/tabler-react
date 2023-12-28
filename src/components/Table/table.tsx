@@ -1,4 +1,4 @@
-import React, { lazy, useEffect, useMemo, useRef, useState } from 'react';
+import React, { createRef, lazy, useEffect, useMemo, useRef, useState } from 'react';
 import RcTable from 'rc-table';
 import type { DefaultRecordType } from 'rc-table/lib/interface';
 import { TableProps as TablerProps } from 'rc-table/lib/Table';
@@ -25,7 +25,7 @@ const Table = ({
     paginatorPosition = 'bottomLeft',
     ...props
 }: TableProps) => {
-    const ref = useRef<HTMLDivElement>();
+    const ref = createRef<HTMLDivElement>();
     const [page, setPage] = useState(0);
 
     useEffect(() => {
@@ -45,7 +45,7 @@ const Table = ({
 
     const dataToDisplay = useMemo(() => {
         if (paginator) {
-            const { pageSize } = paginator;
+            const { pageSize = 10 } = paginator;
             return dataSource.slice(page * pageSize, (page + 1) * pageSize);
         }
         return dataSource;

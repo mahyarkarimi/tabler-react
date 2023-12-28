@@ -1,6 +1,6 @@
-import React from "react";
+import React, { PropsWithChildren } from "react";
 
-const SkeletonGlow: React.FC = ({ children }) => (
+const SkeletonGlow = ({ children }: PropsWithChildren) => (
     <div className="placeholder-glow">{children}</div>
 )
 export default SkeletonGlow;

@@ -6,11 +6,11 @@ export interface BoxSkeletonProps {
     color?: Colors;
     wave?: boolean;
 }
-const BoxSkeleton: React.FC<BoxSkeletonProps> = ({
+const BoxSkeleton = ({
     ratio,
     color,
     wave
-}) => {
+}: BoxSkeletonProps) => {
     const classes = [
         'placeholder',
         'ratio',

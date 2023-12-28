@@ -1,13 +1,3 @@
-import '@tabler/core/';
-
-import '@tabler/core/dist/css/demo.min.css'
-import '@tabler/core/dist/css/tabler.min.css'
-import '@tabler/core/dist/css/tabler-vendors.min.css'
-
-import '@tabler/icons-webfont/tabler-icons.min.css'
-import './styles/default.css';
-import 'animate.css';
-
 export * from './components/Alert';
 export * from './components/AutoComplete';
 export * from './components/Avatar';
@@ -31,6 +21,7 @@ export * from './components/Toast';
 export * from './components/Steps';
 export * from './components/Timeline';
 export * from './components/Tooltip';
+export { TablerProvider } from './TablerProvider';
 
 export { default as Empty } from './components/Empty';
 export { default as Form } from './components/Form';

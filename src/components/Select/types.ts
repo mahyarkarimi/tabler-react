@@ -10,5 +10,5 @@ export interface SelectProps {
     style: CSSProperties,
     size?: 'lg' | 'sm',
     className: string,
-    onChange?: ((value: any, option: DefaultOptionType | DefaultOptionType[]) => void) | undefined,
+    onChange?: ((event: React.ChangeEvent<HTMLSelectElement>) => void) | undefined,
 }

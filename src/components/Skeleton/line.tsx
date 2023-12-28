@@ -7,12 +7,12 @@ export interface LineSkeletonProps {
     color?: Colors;
     wave?: boolean;
 }
-const LineSkeleton: React.FC<LineSkeletonProps> = ({
+const LineSkeleton = ({
     span,
     size,
     color,
     wave
-}) => {
+}: LineSkeletonProps) => {
     const classes = [
         'placeholder',
         `col-${span}`,

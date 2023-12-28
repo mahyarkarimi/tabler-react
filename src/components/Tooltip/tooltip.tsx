@@ -18,9 +18,9 @@ const Tooltip: React.FC<TooltipProps & HTMLAttributes<HTMLButtonElement>> = ({
         className,
     ].filter(Boolean).join(' ');
 
-    const onMouseEnter = (ev) => {
+    const onMouseEnter = (ev: React.MouseEvent<HTMLButtonElement>) => {
         const { onMouseEnter: _onMouseEnter } = props;
-        const { x, y, top, left, right, bottom } = ev.target.getBoundingClientRect();
+
         setTooltip(
             <div
                 className={`tooltip bs-tooltip-${placement} fade show`}
@@ -38,7 +38,7 @@ const Tooltip: React.FC<TooltipProps & HTMLAttributes<HTMLButtonElement>> = ({
             return _onMouseEnter(ev);
         }
     }
-    const onMouseLeave = (ev) => {
+    const onMouseLeave = (ev: React.MouseEvent<HTMLButtonElement>) => {
         const { onMouseLeave: _onMouseLeave } = props;
 
         // setTooltip(null);

@@ -1,5 +1,5 @@
 
-import React, { Children, useEffect, useMemo, useRef, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { AutoCompleteProps } from './types';
 import Input from "../Input";
 
@@ -37,7 +37,7 @@ const AutoComplete = ({
         ].filter(Boolean).join(' ');
     }, [className, size]);
 
-    const inputChange = (e) => {
+    const inputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFilter(e.target.value);
         const option = options.find(o => o.value === e.target.value);
         onSearch && option && onSearch(e.target.value, option);

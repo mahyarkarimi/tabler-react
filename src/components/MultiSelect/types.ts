@@ -14,5 +14,5 @@ export interface MultiSelectProps {
     name: string,
     tokenSeparators: {},
     children: any,
-    onChange?: ((value: any, option: DefaultOptionType | DefaultOptionType[]) => void) | undefined,
+    onChange?: ((value: any) => void) | undefined,
 }
