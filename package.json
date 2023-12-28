@@ -9,6 +9,7 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
+    "test": "",
     "storybook": "NODE_OPTIONS=--openssl-legacy-provider storybook dev -p 6006",
     "build-storybook": "NODE_OPTIONS=--openssl-legacy-provider storybook build"
   },
