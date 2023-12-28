@@ -16,7 +16,7 @@ Simple.args = {
     title: 'Dashboard',
     action: <ButtonList>
         <Button mode="secondary">New view</Button>
-        <Button mode="primary"><IconPlus /> Create new report</Button>
+        <Button mode="primary"><i className='ti ti-plus' /> Create new report</Button>
     </ButtonList>
 }
 

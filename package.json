@@ -1,7 +1,7 @@
 {
   "name": "tabler-react-components",
   "version": "1.0.0",
-  "description": "",
+  "description": "README.md",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/index.d.ts",
@@ -11,12 +11,15 @@
     "dev": "rollup -c -w",
     "test": "",
     "storybook": "NODE_OPTIONS=--openssl-legacy-provider storybook dev -p 6006",
-    "build-storybook": "NODE_OPTIONS=--openssl-legacy-provider storybook build"
+    "build-storybook": "NODE_OPTIONS=--openssl-legacy-provider storybook build",
+    "chromatic": "npx chromatic --project-token=a3af85213079"
   },
-  "author": "Mahyar Karimi",
+  "author": {
+    "name": "Mahyar Karimi"
+  },
   "license": "MIT",
   "repository": {
-    "url": "https://github.com/mahyarkarimi/tabler-react",
+    "url": "git+https://github.com/mahyarkarimi/tabler-react.git",
     "type": "git"
   },
   "devDependencies": {
@@ -57,5 +60,10 @@
     "rc-pagination": "^4.0.3",
     "rc-slider": "^10.3.1",
     "rc-table": "^7.35.2"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/mahyarkarimi/tabler-react/issues"
+  },
+  "homepage": "https://github.com/mahyarkarimi/tabler-react#readme",
+  "_id": "tabler-react-components@1.0.0"
 }
