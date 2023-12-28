@@ -5,6 +5,7 @@
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/index.d.ts",
+  "readme": "README.md",
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
@@ -55,6 +56,5 @@
     "rc-pagination": "^4.0.3",
     "rc-slider": "^10.3.1",
     "rc-table": "^7.35.2"
-  },
-  "readme": "README.md",
+  }
 }
