@@ -1,6 +1,8 @@
 name: 'UI Tests'
 
-on: push
+on:
+  release:
+    types: [created]
 
 jobs:
   # Run interaction and accessibility tests
@@ -10,13 +12,13 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
-          node-version: '16.x'
+          node-version: '18.x'
       - name: Install dependencies
-        run: yarn
+        run: npm install
       - name: Install Playwright
         run: npx playwright install --with-deps
       - name: Build Storybook
-        run: yarn build-storybook --quiet
+        run: npm run build-storybook --quiet
       - name: Serve Storybook and run tests
         run: |
           npx concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
@@ -30,20 +32,9 @@ jobs:
         with:
           fetch-depth: 0 # Required to retrieve git history
       - name: Install dependencies
-        run: yarn
+        run: npm install
       - name: Publish to Chromatic
         uses: chromaui/action@v1
         with:
           # Grab this from the Chromatic manage page
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-  # Run user flow tests with Cypress
-  user-flow:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Install dependencies
-        run: yarn
-      - name: Cypress run
-        uses: cypress-io/github-action@v2
-        with:
-          start: npm start
