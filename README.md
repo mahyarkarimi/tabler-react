@@ -11,6 +11,8 @@ To view documentation of components and its usage please visit [Storybook](https
 <img src="preview.webp" width="auto" height="400" />
 
 [![npm](https://img.shields.io/npm/v/tabler-react-components.svg)](https://www.npmjs.com/package/tabler-react-components)
+[![NPM License](https://img.shields.io/npm/l/all-contributors.svg?style=flat)](https://github.com/mahyarkarimi/tabler-react/blob/master/LICENSE)
+[![NPM Downloads](https://img.shields.io/npm/dt/tabler-react-components.svg?style=flat)]()  
 
 ## 🖥 Environment Support
 
