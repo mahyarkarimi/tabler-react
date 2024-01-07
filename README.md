@@ -10,6 +10,8 @@ To view documentation of components and its usage please visit [Storybook](https
 
 <img src="preview.webp" width="auto" height="400" />
 
+[![npm](https://img.shields.io/npm/v/tabler-react-components.svg)](https://www.npmjs.com/package/tabler-react-components)
+
 ## 🖥 Environment Support
 
 - Modern browsers
